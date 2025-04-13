@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.3
+
+### Patch Changes
+
+- [#7](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/7) [`13a8518`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/13a8518786007ff0ffe09e87101e4288b0e1bf24) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: improve format
+
 ## 0.1.2
 
 ### Patch Changes
