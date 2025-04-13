@@ -9,14 +9,19 @@ import { fileURLToPath } from "url";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 describe("Test for format", () => {
-  for (const { input, inputFileName, outputFileName } of listupFixtures(
+  for (const { input, inputFileName, outputFileName, config } of listupFixtures(
     path.resolve(dirname, "../fixtures/format"),
   )) {
     describe(inputFileName, () => {
       it("should be the formatted result wr expect.", async () => {
         const code = await prettier.format(input, {
+          ...config,
           filepath: inputFileName,
-          plugins: ["@trivago/prettier-plugin-sort-imports", plugin],
+          plugins: [
+            "@trivago/prettier-plugin-sort-imports",
+            ...(config?.plugins ?? []),
+            plugin,
+          ],
         });
         if (
           !fs.existsSync(outputFileName) ||
