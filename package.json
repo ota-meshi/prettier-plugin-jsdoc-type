@@ -20,7 +20,7 @@
     "build:meta": "pnpm run ts -- ./tools/update-meta.ts",
     "build:tsup": "tsup",
     "lint": "eslint .",
-    "tsc": "tsc --project tsconfig.build.json",
+    "tsc": "tsc --project tsconfig.json",
     "eslint-fix": "eslint . --fix",
     "test": "pnpm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --timeout=60000",
     "format": "prettier --write .",
