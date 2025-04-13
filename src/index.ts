@@ -2,6 +2,7 @@ import { formatJSDoc } from "./format-jsdoc.js";
 import type { Comment } from "./js/comment.js";
 import isBlockComment from "./js/is-block-comment.js";
 import * as meta from "./meta.js";
+import type { WrappedContext } from "./wrapped-parser.js";
 import { createWrappedParser } from "./wrapped-parser.js";
 import type { Parser, ParserOptions } from "prettier";
 import * as babelPlugin from "prettier/plugins/babel";
@@ -11,12 +12,12 @@ import * as typescriptPlugin from "prettier/plugins/typescript";
 export { meta };
 
 async function wrappedParse(
-  baseParser: Parser<unknown>,
+  context: WrappedContext<unknown>,
   text: string,
   options: ParserOptions<unknown>,
 ): Promise<unknown> {
-  const ast = await baseParser.parse(text, options);
-  await processComments(ast, options);
+  const ast = await context.rawParser.parse(text, options);
+  await processComments(ast, context.rawOptions);
   return ast;
 }
 
