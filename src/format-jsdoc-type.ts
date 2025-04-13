@@ -16,15 +16,16 @@ async function formatJSDocType0(
   type: string,
   options: ParserOptions,
 ): Promise<string | null> {
-  const formatted = await prettier.format(`(): ${type} => {}`, {
+  const formatted = await prettier.format(`function f(): ${type} {}`, {
     ...options,
     parser: "typescript",
   });
 
   return formatted
     .trim()
-    .replace(/^;\s*/u, "")
-    .replace(/^\(\s*\)\s*:\s*/u, "")
-    .replace(/\s*;$/u, "")
-    .replace(/\s*=>\s*\{\s*\}$/u, "");
+    .replace(/^;/u, "")
+    .replace(/;$/u, "")
+    .trim()
+    .replace(/^function\s*f\s*\(\s*\)\s*:[^\S\n]*/u, "")
+    .replace(/[^\S\n]*\{\s*\}$/u, "");
 }

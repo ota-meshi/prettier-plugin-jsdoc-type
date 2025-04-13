@@ -109,10 +109,10 @@ async function formatJSDocImportTag0(
     },
   );
 
-  const formattedImportTag = formatted.trim().replace(/\s*;$/u, "");
+  const formattedImportTag = formatted.trim().replace(/[^\S\n]*;$/u, "");
   if (!formattedImportTag.includes("\n")) {
     return {
-      text: `@${formatted.trim().replace(/\s*;$/u, "")}`,
+      text: `@${formattedImportTag}`,
       range: [tag.pos, (tag.attributes || tag.moduleSpecifier).end],
     };
   }
@@ -130,7 +130,7 @@ async function formatJSDocImportTag0(
     .map((line, i) => (i ? `${indent}${line}` : line))
     .join("\n");
   return {
-    text: `@${formattedImportTagWithIndent.trim().replace(/\s*;$/u, "")}`,
+    text: `@${formattedImportTagWithIndent}`,
     range: [tag.pos, (tag.attributes || tag.moduleSpecifier).end],
   };
 }
