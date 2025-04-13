@@ -23,8 +23,9 @@ async function formatJSDocType0(
 
   return formatted
     .trim()
-    .replace(/^;\s*/u, "")
-    .replace(/^\(\s*\)\s*:\s*/u, "")
-    .replace(/\s*;$/u, "")
-    .replace(/\s*=>\s*\{\s*\}$/u, "");
+    .replace(/^;/u, "")
+    .replace(/;$/u, "")
+    .trim()
+    .replace(/^\(\s*\)\s*:[^\S\n]*/u, "")
+    .replace(/[^\S\n]*=>\s*\{\s*\}$/u, "");
 }
