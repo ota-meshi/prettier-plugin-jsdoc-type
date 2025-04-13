@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "nodenext",
+    "lib": ["ES2024"],
+    "allowJs": true,
+    // "checkJs": true,
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "outDir": "lib",
+    "resolveJsonModule": true,
+    "noEmit": true,
+
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "tests/src/**/*",
+    "tests/utils/**/*",
+    "tools/**/*",
+    "docs/.vitepress/**/*",
+    "typings/**/*",
+    "tsup.config.ts"
+  ],
+  "exclude": ["lib/**/*"]
+}
