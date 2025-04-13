@@ -19,6 +19,7 @@ async function formatJSDocType0(
   const formatted = await prettier.format(`function f(): ${type} {}`, {
     ...options,
     parser: "typescript",
+    printWidth: (options.printWidth ?? 80) + 15,
   });
 
   return formatted
