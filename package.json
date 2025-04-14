@@ -25,7 +25,7 @@
     "test": "pnpm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --timeout=60000",
     "format": "prettier --write .",
     "cover": "c8 --reporter=lcov pnpm run test",
-    "test:update": "pnpm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --update",
+    "test:update": "pnpm run mocha -- \"tests/src/**/*.ts\" --reporter=dot --update --timeout=6000000",
     "update": "pnpm run ts -- ./tools/update.ts && pnpm run eslint-fix",
     "new": "pnpm run ts -- ./tools/new-rule.ts",
     "docs:watch": "vitepress dev docs --open",
