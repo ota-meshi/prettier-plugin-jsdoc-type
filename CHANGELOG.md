@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.5
+
+### Patch Changes
+
+- [#11](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/11) [`cc0a9e7`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/cc0a9e77db46f7a1bd443690cdfd69aaa9a2fc2c) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: support for spread type
+
 ## 0.1.4
 
 ### Patch Changes
