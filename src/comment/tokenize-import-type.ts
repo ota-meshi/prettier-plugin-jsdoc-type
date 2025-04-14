@@ -4,9 +4,17 @@ const RE_ID = /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy;
 const RE_STRING = /(?:"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/uy;
 const RE_WHITESPACE = /\s+/uy;
 
+type Keyword = "type" | "as" | "from" | "with";
+const RE_KEYWORDS: Record<Keyword, RegExp> = {
+  type: /\btype\b/uy,
+  as: /\bas\b/uy,
+  from: /\bfrom\b/uy,
+  with: /\bwith\b/uy,
+};
+
 type Pos = {
-  sourceIndex: number;
-  charIndex: number;
+  readonly sourceIndex: number;
+  readonly charIndex: number;
 };
 
 class ParserState {
@@ -31,14 +39,14 @@ class ParserState {
   }
 
   public getCurrentPosition() {
-    return { ...this.current };
+    return this.current;
   }
 
   public setCurrentPosition(pos: Pos): void {
-    this.next = this.current = { ...pos };
+    this.next = this.current = pos;
 
     // Skip whitespaces for next position
-    let line;
+    let line: commentParser.Line | undefined;
     while ((line = this.spec.source[this.next.sourceIndex])) {
       const text = line.tokens.description;
       RE_WHITESPACE.lastIndex = this.next.charIndex;
@@ -48,9 +56,8 @@ class ParserState {
     }
   }
 
-  public eatKeyword(test: string): string | null {
-    const re = new RegExp(`\\b${test}\\b`, "uy");
-    return this.eat(re);
+  public eatKeyword(keyword: "type" | "as" | "from" | "with"): string | null {
+    return this.eat(RE_KEYWORDS[keyword]);
   }
 
   public eat(test: "*" | ";" | "," | "{" | "}" | ":" | RegExp): string | null {
@@ -59,8 +66,8 @@ class ParserState {
     if (!line) return null;
     const text = line.tokens.description;
     if (typeof test === "string") {
-      if (!text.startsWith(test, pos.charIndex)) return null;
-      this.setCurrentPosition(this.getAdvancePos(pos, test.length));
+      if (text[pos.charIndex] !== test) return null;
+      this.setCurrentPosition(this.getAdvancePos(pos, 1));
       return test;
     }
     const re = test.sticky ? test : new RegExp(test, "uy");
@@ -71,11 +78,11 @@ class ParserState {
     return matchText;
   }
 
-  private getAdvancePos(pos: Pos, count: number): Pos {
-    let line = this.spec.source[pos.sourceIndex];
-    if (!line) return pos;
-    let sourceIndex = pos.sourceIndex;
-    let charIndex = pos.charIndex + count;
+  private getAdvancePos(start: Pos, count: number): Pos {
+    let line = this.spec.source[start.sourceIndex];
+    if (!line) return start;
+    let sourceIndex = start.sourceIndex;
+    let charIndex = start.charIndex + count;
     while (charIndex >= line.tokens.description.length) {
       sourceIndex++;
       charIndex = charIndex - line.tokens.description.length;

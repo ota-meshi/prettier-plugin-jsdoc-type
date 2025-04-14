@@ -27,7 +27,9 @@ describe("Test for format", () => {
       if (forceUsedTypescript === false && textOption?.ignoreWithoutTypescript)
         continue;
       describe(
-        forceUsedTypescript ? "with typescript" : "without typescript",
+        forceUsedTypescript == null || forceUsedTypescript
+          ? "with typescript"
+          : "without typescript",
         () => {
           describe(inputFileName, () => {
             it("should be the formatted result expect.", async () => {
