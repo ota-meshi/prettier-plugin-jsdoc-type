@@ -1,7 +1,8 @@
 import type * as commentParser from "comment-parser";
 
 const RE_ID = /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy;
-const RE_STRING = /(?:"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/uy;
+const RE_STRING =
+  /(?<quote>["'])(?:[^\n\r"'\\]+|(?!\k<quote>)["']|\\(?:\r\n|[\s\S]))\k<quote>/uy;
 const RE_WHITESPACE = /\s+/uy;
 
 type Keyword = "type" | "as" | "from" | "with";
