@@ -5,14 +5,18 @@ export async function formatJSDocType(
   type: string,
   options: ParserOptions,
 ): Promise<string | null> {
+  const trimmedType = type.trim();
   try {
-    return await formatJSDocType0(type, options);
+    if (trimmedType.startsWith("...")) {
+      return await formatJSDocTypeAsArrayElementType(trimmedType, options);
+    }
+    return await formatJSDocTypeAsReturnType(trimmedType, options);
   } catch {
     return null;
   }
 }
 
-async function formatJSDocType0(
+async function formatJSDocTypeAsReturnType(
   type: string,
   options: ParserOptions,
 ): Promise<string | null> {
@@ -27,6 +31,25 @@ async function formatJSDocType0(
     .replace(/^;/u, "")
     .replace(/;$/u, "")
     .trim()
-    .replace(/^function\s*f\s*\(\s*\)\s*:[^\S\n]*/u, "")
+    .replace(/^function\s+f\s*\(\s*\)\s*:[^\S\n]*/u, "")
     .replace(/[^\S\n]*\{\s*\}$/u, "");
+}
+
+async function formatJSDocTypeAsArrayElementType(
+  type: string,
+  options: ParserOptions,
+): Promise<string | null> {
+  const formatted = await prettier.format(`type A = [${type}]`, {
+    ...options,
+    parser: "typescript",
+    printWidth: (options.printWidth ?? 80) + 10,
+  });
+
+  return formatted
+    .trim()
+    .replace(/^;/u, "")
+    .replace(/;$/u, "")
+    .trim()
+    .replace(/^type\s+A\s*=\s*\[[^\S\n]*/u, "")
+    .replace(/[^\S\n]*\]$/u, "");
 }

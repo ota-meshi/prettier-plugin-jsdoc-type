@@ -2,3 +2,7 @@
 (): import("foo").A => {
     //
 }
+/**
+ * @param {  ... string|boolean  } a
+ */
+function foo(...a){}
