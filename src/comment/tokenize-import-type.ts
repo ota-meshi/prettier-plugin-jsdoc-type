@@ -57,7 +57,7 @@ class ParserState {
     }
   }
 
-  public eatKeyword(keyword: "type" | "as" | "from" | "with"): string | null {
+  public eatKeyword(keyword: Keyword): string | null {
     return this.eat(RE_KEYWORDS[keyword]);
   }
 
