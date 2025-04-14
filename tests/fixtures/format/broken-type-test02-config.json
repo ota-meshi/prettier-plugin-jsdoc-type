@@ -1,0 +1,6 @@
+{
+  "testOption": {
+    "sameOutputAsWithoutPlugin": true,
+    "ignoreTypescript": true
+  }
+}

@@ -13,12 +13,9 @@ export function parseComment(text: string): commentParser.Block {
 function getTokenizers(): Tokenizer[] {
   const typeTokenizer = commentParser.tokenizers.type("preserve");
 
-  // trim
   return [
     commentParser.tokenizers.tag(),
-    /**
-     * Type tokenizer.
-     */
+    /** Type tokenizer. */
     (spec) => {
       if (spec.tag === "import") {
         return tokenizeImportType(spec);

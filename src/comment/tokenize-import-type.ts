@@ -71,7 +71,7 @@ class ParserState {
     return matchText;
   }
 
-  private getAdvancePos(pos: Pos, count = 1): Pos {
+  private getAdvancePos(pos: Pos, count: number): Pos {
     let line = this.spec.source[pos.sourceIndex];
     if (!line) return pos;
     let sourceIndex = pos.sourceIndex;
@@ -87,35 +87,6 @@ class ParserState {
     }
 
     return { sourceIndex, charIndex };
-  }
-
-  public *iterateTypeTokens(): Iterable<{
-    tokens: commentParser.Tokens;
-    type: string;
-    first: boolean;
-  }> {
-    const pos = this.current;
-    const source = this.spec.source;
-    const lastLine = source[pos.sourceIndex];
-    if (pos.sourceIndex > 0) {
-      for (let sourceIndex = 0; sourceIndex < pos.sourceIndex; sourceIndex++) {
-        const line = source[sourceIndex];
-        if (!line) continue;
-        yield {
-          tokens: line.tokens,
-          type: line.tokens.description,
-          first: sourceIndex === 0,
-        };
-      }
-    }
-    const line = source[pos.sourceIndex];
-    if (!line) return;
-    const type = lastLine.tokens.description.slice(0, pos.charIndex);
-    yield {
-      tokens: lastLine.tokens,
-      type,
-      first: pos.sourceIndex === 0,
-    };
   }
 }
 
@@ -137,7 +108,10 @@ export function tokenizeImportType(
 
   const parts: string[] = [];
   let offset = 0;
-  for (const { tokens, type, first } of state.iterateTypeTokens()) {
+  for (const { tokens, type, first } of iterateTypeTokens(
+    state.getCurrentPosition(),
+    spec,
+  )) {
     tokens.type = type;
     if (first) {
       offset = tokens.postDelimiter.length;
@@ -221,6 +195,35 @@ function parseImportAttribute(state: ParserState): boolean {
   if (!state.eat(":")) return false;
   if (!state.eat(RE_STRING)) return false;
   return true;
+}
+
+function* iterateTypeTokens(
+  endPos: Pos,
+  spec: commentParser.Spec,
+): Iterable<{
+  tokens: commentParser.Tokens;
+  type: string;
+  first: boolean;
+}> {
+  const source = spec.source;
+  const lastLine = source[endPos.sourceIndex];
+  for (let sourceIndex = 0; sourceIndex < endPos.sourceIndex; sourceIndex++) {
+    const line = source[sourceIndex];
+    if (!line) continue;
+    yield {
+      tokens: line.tokens,
+      type: line.tokens.description,
+      first: sourceIndex === 0,
+    };
+  }
+  const line = source[endPos.sourceIndex];
+  if (!line) return;
+  const type = lastLine.tokens.description.slice(0, endPos.charIndex);
+  yield {
+    tokens: lastLine.tokens,
+    type,
+    first: endPos.sourceIndex === 0,
+  };
 }
 
 function splitSpace(source: string): [string, string] {

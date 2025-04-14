@@ -9,12 +9,23 @@ import { fileURLToPath } from "url";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+type TestOption = {
+  sameOutputAsWithoutPlugin?: true;
+  ignoreTypescript?: true;
+  ignoreWithoutTypescript?: true;
+};
+
 describe("Test for format", () => {
   for (const { input, inputFileName, outputFileName, config } of listupFixtures(
     path.resolve(dirname, "../fixtures/format"),
   )) {
     // if (!inputFileName.includes("test")) continue;
+
+    const textOption = config.testOption as undefined | TestOption;
     for (const forceUsedTypescript of [false, null]) {
+      if (forceUsedTypescript == null && textOption?.ignoreTypescript) continue;
+      if (forceUsedTypescript === false && textOption?.ignoreWithoutTypescript)
+        continue;
       describe(
         forceUsedTypescript ? "with typescript" : "without typescript",
         () => {
@@ -41,9 +52,6 @@ describe("Test for format", () => {
                 plugins: [...(config?.plugins ?? [])],
               });
 
-              const textOption = config.testOption as
-                | undefined
-                | Record<string, unknown>;
               if (textOption?.sameOutputAsWithoutPlugin) {
                 assert.strictEqual(code, codeWithoutPlugin);
               } else {
