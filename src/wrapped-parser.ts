@@ -2,15 +2,20 @@ import type { Parser, ParserOptions, Plugin } from "prettier";
 
 export type WrappedParserPlugin<T> = {
   parse?: (
-    baseParser: Parser<T>,
+    context: WrappedContext<T>,
     text: string,
     options: ParserOptions<T>,
   ) => T | Promise<T>;
   preprocess?: (
-    baseParser: Parser<T>,
+    context: WrappedContext<T>,
     text: string,
     options: ParserOptions<T>,
   ) => string;
+};
+
+export type WrappedContext<T> = {
+  rawParser: Parser<T>;
+  rawOptions: ParserOptions<T>;
 };
 /**
  * Create a wrapped parser.
@@ -20,6 +25,8 @@ export function createWrappedParser<T = unknown>(
   plugin: WrappedParserPlugin<T>,
   baseParser: Parser<T>,
 ): Parser<T> {
+  const cacheWrappedOptions = new WeakMap<ParserOptions<T>, ParserOptions<T>>();
+
   let baseParserPromise: Promise<Parser<T>> = Promise.resolve(baseParser);
   const wrappedParser: Parser<T> = {
     astFormat: baseParser.astFormat,
@@ -63,17 +70,22 @@ export function createWrappedParser<T = unknown>(
       return text;
     },
     async parse(text: string, options: ParserOptions<T>, ...args): Promise<T> {
-      const parser = await baseParserPromise;
+      const rawParser = await baseParserPromise;
+      const wrappedOptions = wrapOptions(options);
+      const context: WrappedContext<T> = {
+        rawParser,
+        rawOptions: options,
+      };
       let processedText = text;
-      if (plugin?.preprocess || parser.preprocess) {
+      if (plugin?.preprocess || rawParser.preprocess) {
         processedText =
-          plugin?.preprocess?.(parser, processedText, options) ??
-          parser.preprocess!(processedText, options);
+          plugin?.preprocess?.(context, processedText, wrappedOptions) ??
+          rawParser.preprocess!(processedText, wrappedOptions);
         options.originalText = processedText;
       }
       return (
-        plugin?.parse?.(parser, processedText, options, ...args) ??
-        parser.parse(processedText, options, ...args)
+        plugin?.parse?.(context, processedText, wrappedOptions, ...args) ??
+        rawParser.parse(processedText, wrappedOptions, ...args)
       );
     },
     locStart: baseParser.locStart,
@@ -81,6 +93,32 @@ export function createWrappedParser<T = unknown>(
   };
 
   return wrappedParser;
+
+  function wrapOptions(options: ParserOptions<T>): ParserOptions<T> {
+    if (cacheWrappedOptions.has(options)) {
+      return cacheWrappedOptions.get(options)!;
+    }
+    const result = new Proxy(options, {
+      get(_target, prop) {
+        if (prop === "plugins") {
+          if (Array.isArray(options.plugins)) {
+            const plugins = options.plugins as Plugin<T>[];
+            return plugins.filter(
+              (p) =>
+                !p.parsers || !Object.values(p.parsers).includes(wrappedParser),
+            );
+          }
+        }
+        return options[prop as keyof ParserOptions<T>];
+      },
+      set(_target, prop, value) {
+        options[prop as keyof ParserOptions<T>] = value;
+        return true;
+      },
+    });
+    cacheWrappedOptions.set(options, result);
+    return result;
+  }
 }
 
 function getParserPluginByParserName<T>(
