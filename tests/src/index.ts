@@ -12,16 +12,13 @@ describe("Test for format", () => {
   for (const { input, inputFileName, outputFileName, config } of listupFixtures(
     path.resolve(dirname, "../fixtures/format"),
   )) {
+    // if (!inputFileName.includes("test")) continue;
     describe(inputFileName, () => {
       it("should be the formatted result wr expect.", async () => {
         const code = await prettier.format(input, {
           ...config,
           filepath: inputFileName,
-          plugins: [
-            "@trivago/prettier-plugin-sort-imports",
-            ...(config?.plugins ?? []),
-            plugin,
-          ],
+          plugins: [...(config?.plugins ?? []), plugin],
         });
         if (
           !fs.existsSync(outputFileName) ||
@@ -31,6 +28,25 @@ describe("Test for format", () => {
         }
         const output = fs.readFileSync(outputFileName, "utf8");
         assert.strictEqual(code, output);
+
+        const codeWithoutPlugin = await prettier.format(input, {
+          ...config,
+          filepath: inputFileName,
+          plugins: [...(config?.plugins ?? [])],
+        });
+
+        const textOption = config.testOption as
+          | undefined
+          | Record<string, unknown>;
+        if (textOption?.sameOutputAsWithoutPlugin) {
+          assert.strictEqual(code, codeWithoutPlugin);
+        } else {
+          assert.notStrictEqual(
+            code,
+            codeWithoutPlugin,
+            "Test cases have the same format without the plugin.",
+          );
+        }
       });
     });
   }
