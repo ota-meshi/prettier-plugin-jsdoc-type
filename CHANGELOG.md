@@ -1,5 +1,13 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.7
+
+### Patch Changes
+
+- [#15](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/15) [`e5b23bb`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/e5b23bbf2c73fd0456b73d6d85269481af31873f) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: incorrect format for rename import
+
+- [#15](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/15) [`e5b23bb`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/e5b23bbf2c73fd0456b73d6d85269481af31873f) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: Improved `@import` tag formatting to work even when TypeScript is not installed.
+
 ## 0.1.6
 
 ### Patch Changes
