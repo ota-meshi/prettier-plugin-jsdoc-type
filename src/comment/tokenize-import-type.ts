@@ -1,100 +1,111 @@
 import type * as commentParser from "comment-parser";
 
-const RE_ID = /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy;
-const RE_STRING =
-  /(?<quote>["'])(?:[^\n\r"'\\]+|(?!\k<quote>)["']|\\(?:\r\n|[\s\S]))\k<quote>/uy;
-const RE_WHITESPACE = /\s+/uy;
-
-type Keyword = "type" | "as" | "from" | "with";
-const RE_KEYWORDS: Record<Keyword, RegExp> = {
-  type: /\btype\b/uy,
-  as: /\bas\b/uy,
-  from: /\bfrom\b/uy,
-  with: /\bwith\b/uy,
-};
-
 type Pos = {
   readonly sourceIndex: number;
   readonly charIndex: number;
 };
+type Keyword = "type" | "as" | "from" | "with";
+type Punctuation = "*" | ";" | "," | "{" | "}" | ":";
+type IdToken = { type: "id"; value: string; pos: Pos };
+type StrToken = { type: "str"; value: string; pos: Pos };
+type SpaceToken = { type: "space"; value: string; pos: Pos };
+type PunctuationToken = {
+  type: Punctuation;
+  value: string;
+  pos: Pos;
+};
+type UnknownToken = { type: "unknown"; value: string; pos: Pos };
+type Token = IdToken | StrToken | SpaceToken | PunctuationToken | UnknownToken;
+type TokenBuilder = (text: string, pos: Pos) => Token | null;
+const TOKEN_BUILDERS: TokenBuilder[] = [
+  regexpToTokenBuilder(
+    /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy,
+    "id",
+  ),
+  regexpToTokenBuilder(
+    /(?<quote>["'])(?:[^\n\r"'\\]+|(?!\k<quote>)["']|\\(?:\r\n|[\s\S]))\k<quote>/uy,
+    "str",
+  ),
+  regexpToTokenBuilder(/\s+/uy, "space"),
+  (text, pos) => {
+    const c = text[pos.charIndex];
+    return ["*", ";", ",", "{", "}", ":"].includes(c)
+      ? { type: c as Punctuation, value: c, pos }
+      : null;
+  },
+  regexpToTokenBuilder(/[\s\S]/uy, "unknown"),
+];
 
-class ParserState {
+function regexpToTokenBuilder(re: RegExp, type: Token["type"]): TokenBuilder {
+  return (text, pos) => {
+    re.lastIndex = pos.charIndex;
+    const value = re.exec(text)?.[0];
+    if (!value) return null;
+    return { type, value, pos };
+  };
+}
+
+class Tokenizer {
   private readonly spec: commentParser.Spec;
 
-  private current: Pos;
-
-  private next: Pos;
+  private pos: Pos = { sourceIndex: 0, charIndex: 0 };
 
   public constructor(spec: commentParser.Spec) {
     this.spec = spec;
-
-    this.current = {
-      sourceIndex: 0,
-      charIndex: 0,
-    };
-    this.next = {
-      sourceIndex: 0,
-      charIndex: 0,
-    };
-    this.setCurrentPosition(this.current);
   }
 
-  public getCurrentPosition() {
-    return this.current;
-  }
-
-  public setCurrentPosition(pos: Pos): void {
-    this.next = this.current = pos;
-
-    // Skip whitespaces for next position
-    let line: commentParser.Line | undefined;
-    while ((line = this.spec.source[this.next.sourceIndex])) {
-      const text = line.tokens.description;
-      RE_WHITESPACE.lastIndex = this.next.charIndex;
-      const matchText = RE_WHITESPACE.exec(text)?.[0];
-      if (!matchText) return;
-      this.next = this.getAdvancePos(this.next, matchText.length);
-    }
-  }
-
-  public eatKeyword(keyword: Keyword): string | null {
-    return this.eat(RE_KEYWORDS[keyword]);
-  }
-
-  public eat(test: "*" | ";" | "," | "{" | "}" | ":" | RegExp): string | null {
-    const pos = this.next;
-    const line = this.spec.source[pos.sourceIndex];
+  public next(): Token | null {
+    const { sourceIndex, charIndex } = this.pos;
+    const line = this.spec.source[sourceIndex];
     if (!line) return null;
     const text = line.tokens.description;
-    if (typeof test === "string") {
-      if (text[pos.charIndex] !== test) return null;
-      this.setCurrentPosition(this.getAdvancePos(pos, 1));
-      return test;
+    if (text.length <= charIndex) {
+      this.pos = { sourceIndex: sourceIndex + 1, charIndex: 0 };
+      return this.next();
     }
-    const re = test.sticky ? test : new RegExp(test, "uy");
-    re.lastIndex = pos.charIndex;
-    const matchText = re.exec(text)?.[0];
-    if (!matchText) return null;
-    this.setCurrentPosition(this.getAdvancePos(pos, matchText.length));
-    return matchText;
+    for (const builder of TOKEN_BUILDERS) {
+      const token = builder(text, this.pos);
+      if (!token) continue;
+      this.pos = {
+        sourceIndex,
+        charIndex: charIndex + token.value.length,
+      };
+      return token;
+    }
+    throw new Error("Unexpected token");
+  }
+}
+
+class ParserState {
+  public readonly tokenizer: Tokenizer;
+
+  public current: Token | null = null;
+
+  public constructor(spec: commentParser.Spec) {
+    this.tokenizer = new Tokenizer(spec);
+    this.advance();
   }
 
-  private getAdvancePos(start: Pos, count: number): Pos {
-    let line = this.spec.source[start.sourceIndex];
-    if (!line) return start;
-    let sourceIndex = start.sourceIndex;
-    let charIndex = start.charIndex + count;
-    while (charIndex >= line.tokens.description.length) {
-      sourceIndex++;
-      charIndex = charIndex - line.tokens.description.length;
-      line = this.spec.source[sourceIndex];
-      if (!line) {
-        charIndex = 0;
-        break;
-      }
-    }
+  public eat(type: Token["type"]): Token | null {
+    if (this.current?.type !== type) return null;
+    const result = this.current;
+    this.advance();
+    return result;
+  }
 
-    return { sourceIndex, charIndex };
+  public eatValue(value: Keyword): Token | null {
+    if (this.current?.value !== value) return null;
+    const result = this.current;
+    this.advance();
+    return result;
+  }
+
+  public advance(): Token | null {
+    this.current = this.tokenizer.next();
+    if (this.current?.type !== "space") {
+      return this.current;
+    }
+    return this.advance();
   }
 }
 
@@ -103,21 +114,27 @@ export function tokenizeImportType(
 ): commentParser.Spec {
   const state = new ParserState(spec);
   if (!parseImportClause(state)) return spec;
-  if (!state.eatKeyword("from")) return spec;
-  if (!state.eat(RE_STRING)) return spec;
+  if (!state.eatValue("from")) return spec;
+  let lastToken = state.eat("str");
+  if (!lastToken) return spec;
 
-  const posForEndOfSource = state.getCurrentPosition();
-  if (state.eatKeyword("with")) {
-    if (!parseImportAttributes(state)) {
-      state.setCurrentPosition(posForEndOfSource);
+  const semi = state.eat(";");
+  if (semi) {
+    lastToken = semi;
+  } else if (state.eatValue("with")) {
+    const attrsToken = parseImportAttributes(state);
+    if (attrsToken) {
+      lastToken = state.eat(";") || attrsToken;
     }
   }
-  state.eat(";");
 
   const parts: string[] = [];
   let offset = 0;
   for (const { tokens, type, first } of iterateTypeTokens(
-    state.getCurrentPosition(),
+    {
+      sourceIndex: lastToken.pos.sourceIndex,
+      charIndex: lastToken.pos.charIndex + lastToken.value.length,
+    },
     spec,
   )) {
     tokens.type = type;
@@ -137,80 +154,79 @@ export function tokenizeImportType(
   return spec;
 }
 
-function parseImportClause(state: ParserState): boolean {
-  if (parseNamespaceImport(state)) {
-    return true;
+function parseImportClause(state: ParserState): Token | null {
+  let token;
+  if ((token = parseNamespaceImport(state))) {
+    return token;
   }
-  if (state.eat(RE_ID)) {
+  if ((token = state.eat("id"))) {
     // Default import
     if (state.eat(",")) {
       return parseNamedImports(state);
     }
-    return true;
+    return token;
   }
 
   return parseNamedImports(state);
 }
 
-function parseNamespaceImport(state: ParserState): boolean {
-  return Boolean(state.eat("*") && state.eatKeyword("as") && state.eat(RE_ID));
+function parseNamespaceImport(state: ParserState): Token | null {
+  return state.eat("*") && state.eatValue("as") && state.eat("id");
 }
 
-function parseNamedImports(state: ParserState): boolean {
+function parseNamedImports(state: ParserState): Token | null {
   return parseElementsWithBraces(state, parseImportSpec);
 }
 
-function parseImportSpec(state: ParserState): boolean {
-  let hasType = false;
-  if (state.eatKeyword("type")) {
-    hasType = true;
-    if (state.eatKeyword("as")) {
-      if (state.eatKeyword("as")) {
-        state.eat(RE_ID);
-        // import { type as as } from "mod"
-        // import { type as as as } from "mod"
-        // import { type as as X } from "mod"
-        return true;
-      }
-      state.eat(RE_ID);
-      // import { type as } from "mod"
+function parseImportSpec(state: ParserState): Token | null {
+  let typeToken: Token | null = null;
+  if ((typeToken = state.eatValue("type"))) {
+    let asToken1;
+    if ((asToken1 = state.eatValue("as"))) {
+      const asToken2 = state.eatValue("as");
       // import { type as as } from "mod"
+      // import { type as as as } from "mod"
+      // import { type as as X } from "mod"
+
+      // import { type as } from "mod"
       // import { type as X } from "mod"
-      return true;
+      return state.eat("id") || asToken2 || asToken1;
     }
   }
 
-  if (!state.eat(RE_ID) && !state.eat(RE_STRING)) {
+  const keyToken = state.eat("id") || state.eat("str");
+  if (!keyToken) {
     // Maybe `import { type } from "mod"`
-    return hasType;
+    return typeToken;
   }
-  if (state.eatKeyword("as")) {
-    if (!state.eat(RE_ID)) return false;
+  if (state.eatValue("as")) {
+    return state.eat("id");
   }
-  return true;
+  return keyToken;
 }
 
-function parseImportAttributes(state: ParserState): boolean {
+function parseImportAttributes(state: ParserState): Token | null {
   return parseElementsWithBraces(state, parseImportAttribute);
 }
 
-function parseImportAttribute(state: ParserState): boolean {
-  if (!state.eat(RE_ID) && !state.eat(RE_STRING)) return false;
-  if (!state.eat(":")) return false;
-  if (!state.eat(RE_STRING)) return false;
-  return true;
+function parseImportAttribute(state: ParserState): Token | null {
+  const keyToken = state.eat("id") || state.eat("str");
+  if (!keyToken) return null;
+  if (!state.eat(":")) return null;
+  return state.eat("str");
 }
 
 function parseElementsWithBraces(
   state: ParserState,
-  parseElement: (state: ParserState) => boolean,
-): boolean {
-  if (!state.eat("{")) return false;
+  parseElement: (state: ParserState) => Token | null,
+): Token | null {
+  if (!state.eat("{")) return null;
   do {
-    if (state.eat("}")) return true;
-    if (!parseElement(state)) return false;
+    const close = state.eat("}");
+    if (close) return close;
+    if (!parseElement(state)) return null;
   } while (state.eat(","));
-  return Boolean(state.eat("}"));
+  return state.eat("}");
 }
 
 function* iterateTypeTokens(
@@ -243,8 +259,6 @@ function* iterateTypeTokens(
 }
 
 function splitSpace(source: string): [string, string] {
-  const matches = /^\s+/u.exec(source);
-  return matches == null
-    ? ["", source]
-    : [source.slice(0, matches[0].length), source.slice(matches[0].length)];
+  const spaces = /^\s+/u.exec(source)?.[0];
+  return spaces ? [spaces, source.slice(spaces.length)] : ["", source];
 }
