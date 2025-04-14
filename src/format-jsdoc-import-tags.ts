@@ -140,14 +140,13 @@ function getTextJSDocImportTag(
   tag: TS.JSDocImportTag,
   sourceFile: TS.SourceFile,
 ): string {
-  const text: string[] = ["import"];
+  const importClause: string[] = [];
   if (tag.importClause) {
     if (tag.importClause.name) {
-      text.push(tag.importClause.name.getText(sourceFile));
+      importClause.push(tag.importClause.name.getText(sourceFile));
     }
     if (tag.importClause.namedBindings) {
       if (ts.isNamedImports(tag.importClause.namedBindings)) {
-        text.push("{");
         const namedImports = tag.importClause.namedBindings;
         const specs: string[] = [];
         for (const element of namedImports.elements) {
@@ -157,36 +156,33 @@ function getTextJSDocImportTag(
           }
           specText.push(element.name.getText(sourceFile));
           if (element.propertyName) {
-            specText.push(` as ${element.propertyName.getText(sourceFile)}`);
+            specText.push("as");
+            specText.push(element.propertyName.getText(sourceFile));
           }
           specs.push(specText.join(" "));
         }
-        text.push(specs.join(", "));
-        text.push("}");
+        importClause.push(`{${specs.join(", ")}}`);
       } else if (ts.isNamespaceImport(tag.importClause.namedBindings)) {
         const namespaceImport = tag.importClause.namedBindings;
-        text.push(`* as ${namespaceImport.name.getText(sourceFile)}`);
+        importClause.push(`* as ${namespaceImport.name.getText(sourceFile)}`);
       }
     }
   }
 
-  text.push("from");
-  text.push(tag.moduleSpecifier.getText(sourceFile));
+  const moduleSpecifier = tag.moduleSpecifier.getText(sourceFile);
 
-  if (tag.attributes) {
-    text.push("with");
-    text.push("{");
-    const attributes: string[] = [];
-    for (const element of tag.attributes.elements) {
-      attributes.push(
-        `${element.name.getText(sourceFile)}:${element.value.getText(sourceFile)}`,
-      );
-    }
-    text.push(attributes.join(", "));
-    text.push("}");
+  if (!tag.attributes) {
+    return `import ${importClause.join(",")} from ${moduleSpecifier}`;
   }
 
-  return text.join(" ");
+  const attributes: string[] = [];
+  for (const element of tag.attributes.elements) {
+    attributes.push(
+      `${element.name.getText(sourceFile)}:${element.value.getText(sourceFile)}`,
+    );
+  }
+
+  return `import ${importClause.join(",")} from ${moduleSpecifier} with {${attributes.join(",")}}`;
 }
 
 async function traverse(
