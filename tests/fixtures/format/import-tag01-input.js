@@ -1,1 +1,1 @@
-/** @import {    Foo      } from 'bar' */
+/** @import   {    Foo      } from 'bar' */
