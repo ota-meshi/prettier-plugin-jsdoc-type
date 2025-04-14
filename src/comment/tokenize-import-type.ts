@@ -165,11 +165,17 @@ function parseImportSpec(state: ParserState): boolean {
   if (state.eatKeyword("type")) {
     hasType = true;
     if (state.eatKeyword("as")) {
-      state.eatKeyword("as");
-      state.eatKeyword("as");
+      if (state.eatKeyword("as")) {
+        state.eat(RE_ID);
+        // import { type as as } from "mod"
+        // import { type as as as } from "mod"
+        // import { type as as X } from "mod"
+        return true;
+      }
+      state.eat(RE_ID);
       // import { type as } from "mod"
       // import { type as as } from "mod"
-      // import { type as as as } from "mod"
+      // import { type as X } from "mod"
       return true;
     }
   }

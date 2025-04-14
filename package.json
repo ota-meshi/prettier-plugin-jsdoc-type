@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "prettier": ">=3.5.3",
-    "typescript": ">=5.8.2"
+    "typescript": "*"
   },
   "devDependenciesMeta": {
     "typescript": {
