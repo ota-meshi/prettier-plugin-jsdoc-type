@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.6
+
+### Patch Changes
+
+- [#13](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/13) [`e1654d5`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/e1654d58f19ab0230b56dd45ff300f1304c9eefb) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: issue for complex `@import`
+
 ## 0.1.5
 
 ### Patch Changes
