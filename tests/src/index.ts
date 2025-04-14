@@ -1,3 +1,4 @@
+import { setForceUseTypescript } from "../../src/format-jsdoc.js";
 import * as plugin from "../../src/index.js";
 import { listupFixtures } from "../utils/utils.js";
 import assert from "assert";
@@ -8,46 +9,65 @@ import { fileURLToPath } from "url";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+type TestOption = {
+  sameOutputAsWithoutPlugin?: true;
+  ignoreTypescript?: true;
+  ignoreWithoutTypescript?: true;
+};
+
 describe("Test for format", () => {
   for (const { input, inputFileName, outputFileName, config } of listupFixtures(
     path.resolve(dirname, "../fixtures/format"),
   )) {
     // if (!inputFileName.includes("test")) continue;
-    describe(inputFileName, () => {
-      it("should be the formatted result wr expect.", async () => {
-        const code = await prettier.format(input, {
-          ...config,
-          filepath: inputFileName,
-          plugins: [...(config?.plugins ?? []), plugin],
-        });
-        if (
-          !fs.existsSync(outputFileName) ||
-          process.argv.includes("--update")
-        ) {
-          fs.writeFileSync(outputFileName, code, "utf8");
-        }
-        const output = fs.readFileSync(outputFileName, "utf8");
-        assert.strictEqual(code, output);
 
-        const codeWithoutPlugin = await prettier.format(input, {
-          ...config,
-          filepath: inputFileName,
-          plugins: [...(config?.plugins ?? [])],
-        });
+    const textOption = config.testOption as undefined | TestOption;
+    for (const forceUsedTypescript of [false, null]) {
+      if (forceUsedTypescript == null && textOption?.ignoreTypescript) continue;
+      if (forceUsedTypescript === false && textOption?.ignoreWithoutTypescript)
+        continue;
+      describe(
+        forceUsedTypescript == null || forceUsedTypescript
+          ? "with typescript"
+          : "without typescript",
+        () => {
+          describe(inputFileName, () => {
+            it("should be the formatted result expect.", async () => {
+              setForceUseTypescript(forceUsedTypescript);
+              const code = await prettier.format(input, {
+                ...config,
+                filepath: inputFileName,
+                plugins: [...(config?.plugins ?? []), plugin],
+              });
+              if (
+                !fs.existsSync(outputFileName) ||
+                (process.argv.includes("--update") &&
+                  forceUsedTypescript === false)
+              ) {
+                fs.writeFileSync(outputFileName, code, "utf8");
+              }
+              const output = fs.readFileSync(outputFileName, "utf8");
+              assert.strictEqual(code, output);
 
-        const textOption = config.testOption as
-          | undefined
-          | Record<string, unknown>;
-        if (textOption?.sameOutputAsWithoutPlugin) {
-          assert.strictEqual(code, codeWithoutPlugin);
-        } else {
-          assert.notStrictEqual(
-            code,
-            codeWithoutPlugin,
-            "Test cases have the same format without the plugin.",
-          );
-        }
-      });
-    });
+              const codeWithoutPlugin = await prettier.format(input, {
+                ...config,
+                filepath: inputFileName,
+                plugins: [...(config?.plugins ?? [])],
+              });
+
+              if (textOption?.sameOutputAsWithoutPlugin) {
+                assert.strictEqual(code, codeWithoutPlugin);
+              } else {
+                assert.notStrictEqual(
+                  code,
+                  codeWithoutPlugin,
+                  "Test cases have the same format without the plugin.",
+                );
+              }
+            });
+          });
+        },
+      );
+    }
   }
 });

@@ -16,6 +16,18 @@ export async function formatJSDocType(
   }
 }
 
+export async function formatJSDocImportType(
+  type: string,
+  options: ParserOptions,
+): Promise<string | null> {
+  const trimmedType = type.trim();
+  try {
+    return await formatJSDocImportType0(trimmedType, options);
+  } catch {
+    return null;
+  }
+}
+
 async function formatJSDocTypeAsReturnType(
   type: string,
   options: ParserOptions,
@@ -38,7 +50,7 @@ async function formatJSDocTypeAsReturnType(
 async function formatJSDocTypeAsArrayElementType(
   type: string,
   options: ParserOptions,
-): Promise<string | null> {
+): Promise<string> {
   const formatted = await prettier.format(`type A = [${type}]`, {
     ...options,
     parser: "typescript",
@@ -52,4 +64,22 @@ async function formatJSDocTypeAsArrayElementType(
     .trim()
     .replace(/^type\s+A\s*=\s*\[[^\S\n]*/u, "")
     .replace(/[^\S\n]*\]$/u, "");
+}
+
+async function formatJSDocImportType0(
+  type: string,
+  options: ParserOptions,
+): Promise<string> {
+  const formatted = await prettier.format(`import ${type}`, {
+    ...options,
+    parser: "typescript",
+  });
+
+  return formatted
+    .trim()
+    .replace(/^;/u, "")
+    .replace(/;$/u, "")
+    .trim()
+    .replace(/^import[^\S\n]*/u, "")
+    .replace(/[^\S\n]*;$/u, "");
 }

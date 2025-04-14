@@ -23,11 +23,36 @@ export async function formatJSDocImportTags(
   }
 }
 
+let cache: { ts: typeof TS | null } | null = null;
+
+export async function getTypescript(): Promise<typeof TS | null> {
+  if (cache) {
+    return cache.ts;
+  }
+  try {
+    const ts = await import("typescript");
+    const version = ts.version.split(".").map(Number);
+    if (version[0] < 5 || (version[0] === 5 && version[1] < 5)) {
+      // typescript version is too old
+      // eslint-disable-next-line require-atomic-updates -- OK
+      cache = { ts: null };
+      return null;
+    }
+    // eslint-disable-next-line require-atomic-updates -- OK
+    cache = { ts };
+    return ts;
+  } catch {
+    cache = { ts: null };
+    return null;
+  }
+}
+
 async function formatJSDocImportTags0(
   text: string,
   options: ParserOptions,
 ): Promise<string | null> {
-  const ts = await import("typescript");
+  const ts = await getTypescript();
+  if (!ts) return null;
   const compilerHost: TS.CompilerHost = {
     fileExists: () => true,
     getCanonicalFileName: (filename) => filename,
@@ -154,11 +179,11 @@ function getTextJSDocImportTag(
           if (element.isTypeOnly) {
             specText.push("type");
           }
-          specText.push(element.name.getText(sourceFile));
           if (element.propertyName) {
-            specText.push("as");
             specText.push(element.propertyName.getText(sourceFile));
+            specText.push("as");
           }
+          specText.push(element.name.getText(sourceFile));
           specs.push(specText.join(" "));
         }
         importClause.push(`{${specs.join(", ")}}`);

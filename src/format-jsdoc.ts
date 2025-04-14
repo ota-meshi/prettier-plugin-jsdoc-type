@@ -1,15 +1,26 @@
-import { formatJSDocImportTags } from "./format-jsdoc-import-tags.js";
-import { formatJSDocType } from "./format-jsdoc-type.js";
+import { parseComment } from "./comment/parser.js";
+import {
+  formatJSDocImportTags,
+  getTypescript,
+} from "./format-jsdoc-import-tags.js";
+import { formatJSDocImportType, formatJSDocType } from "./format-jsdoc-type.js";
 import type { Comment } from "./js/comment.js";
 import { getJSDocIndentFromText } from "./jsdoc-indent-from-text.js";
-import * as commentParser from "comment-parser";
+import type * as commentParser from "comment-parser";
 import type { ParserOptions } from "prettier";
+
+export let forceUseTypescript: boolean | null = null;
+export function setForceUseTypescript(value: boolean | null): void {
+  forceUseTypescript = value;
+}
 
 export async function formatJSDoc(
   comment: Comment,
   options: ParserOptions,
 ): Promise<string | null> {
-  const block = commentParser.parse(`/*${comment.value}*/`)[0];
+  let availableTs: boolean | null = forceUseTypescript;
+
+  const block = parseComment(comment.value);
   const lineSources = block.source.map((line) => line.source);
 
   const lines: (
@@ -25,7 +36,12 @@ export async function formatJSDoc(
   )[] = [];
   let startLine = 0;
   for (const tag of block.tags) {
-    if (!tag.type || tag.tag === "import") continue;
+    if (!tag.type) continue;
+    if (
+      tag.tag === "import" &&
+      (availableTs ??= Boolean(await getTypescript()))
+    )
+      continue;
     const tagStartLine = tag.source[0].number;
     const tagEndLine = tag.source[tag.source.length - 1].number + 1;
     lines.push(
@@ -63,7 +79,10 @@ export async function formatJSDoc(
     .replace(/^\/\*/u, "")
     .replace(/\*\/$/u, "");
 
-  if (block.tags.some((tag) => tag.tag === "import")) {
+  if (
+    block.tags.some((tag) => tag.tag === "import") &&
+    (availableTs ??= Boolean(await getTypescript()))
+  ) {
     return formatJSDocImportTags(formatted, options);
   }
   return formatted;
@@ -83,7 +102,6 @@ async function formatJSDocTag(
   const typeEndLine = tag.source.findLast((line) => line.tokens.type)!;
 
   const prefix: string[] = [];
-  const typeLines: string[] = [];
   const suffix: string[] = [];
 
   for (const sourceLine of tag.source) {
@@ -100,12 +118,6 @@ async function formatJSDocTag(
           sourceLine.tokens.postTag,
       );
     }
-    if (
-      typeStartLine.number <= sourceLine.number &&
-      sourceLine.number <= typeEndLine.number
-    ) {
-      typeLines.push(sourceLine.tokens.type);
-    }
     if (sourceLine.number === typeEndLine.number) {
       suffix.push(
         sourceLine.tokens.postType +
@@ -121,25 +133,27 @@ async function formatJSDocTag(
     }
   }
 
-  const type = typeLines
-    .join("\n")
-    .trim()
-    .replace(/^\{|\}$/gu, "");
-  const formattedType = await formatJSDocType(type, options);
+  let formattedType: string | null = null;
+  if (tag.tag !== "import") {
+    formattedType = await formatJSDocType(tag.type, options);
+    prefix[prefix.length - 1] += "{";
+    suffix[0] = `}${suffix[0]}`;
+  } else {
+    formattedType = await formatJSDocImportType(tag.type, options);
+    prefix[prefix.length - 1] = `${prefix[prefix.length - 1].trimEnd()} `;
+  }
   if (formattedType == null) return null;
 
   if (!formattedType.includes("\n")) {
-    return `${prefix.join("\n")}{${formattedType}}${suffix.join("\n")}`;
+    return `${prefix.join("\n")}${formattedType}${suffix.join("\n")}`;
   }
   const formattedTypeLines = formattedType.split("\n");
   const indent =
     typeStartLine.number === 0
-      ? getJSDocIndentFromText(
-          `${prefix.join("\n")}{${type}}${suffix.join("\n")}`,
-        )
+      ? getJSDocIndentFromText(tag.source.map((line) => line.source).join("\n"))
       : tokensToIndent(typeStartLine.tokens);
   const formattedTypeWithIndent = formattedTypeLines
     .map((line, i) => (i ? `${indent}${line}` : line))
     .join("\n");
-  return `${prefix.join("\n")}{${formattedTypeWithIndent}}${suffix.join("\n")}`;
+  return `${prefix.join("\n")}${formattedTypeWithIndent}${suffix.join("\n")}`;
 }
