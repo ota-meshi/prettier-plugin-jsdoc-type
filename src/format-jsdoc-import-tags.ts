@@ -179,11 +179,11 @@ function getTextJSDocImportTag(
           if (element.isTypeOnly) {
             specText.push("type");
           }
-          specText.push(element.name.getText(sourceFile));
           if (element.propertyName) {
-            specText.push("as");
             specText.push(element.propertyName.getText(sourceFile));
+            specText.push("as");
           }
+          specText.push(element.name.getText(sourceFile));
           specs.push(specText.join(" "));
         }
         importClause.push(`{${specs.join(", ")}}`);
