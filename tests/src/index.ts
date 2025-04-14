@@ -39,7 +39,8 @@ describe("Test for format", () => {
               });
               if (
                 !fs.existsSync(outputFileName) ||
-                process.argv.includes("--update")
+                (process.argv.includes("--update") &&
+                  forceUsedTypescript === false)
               ) {
                 fs.writeFileSync(outputFileName, code, "utf8");
               }

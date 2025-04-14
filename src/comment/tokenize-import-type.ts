@@ -149,12 +149,7 @@ function parseNamespaceImport(state: ParserState): boolean {
 }
 
 function parseNamedImports(state: ParserState): boolean {
-  if (!state.eat("{")) return false;
-  do {
-    if (state.eat("}")) return true;
-    if (!parseImportSpec(state)) return false;
-  } while (state.eat(","));
-  return Boolean(state.eat("}"));
+  return parseElementsWithBraces(state, parseImportSpec);
 }
 
 function parseImportSpec(state: ParserState): boolean {
@@ -182,12 +177,7 @@ function parseImportSpec(state: ParserState): boolean {
 }
 
 function parseImportAttributes(state: ParserState): boolean {
-  if (!state.eat("{")) return false;
-  do {
-    if (state.eat("}")) return true;
-    if (!parseImportAttribute(state)) return false;
-  } while (state.eat(","));
-  return Boolean(state.eat("}"));
+  return parseElementsWithBraces(state, parseImportAttribute);
 }
 
 function parseImportAttribute(state: ParserState): boolean {
@@ -195,6 +185,18 @@ function parseImportAttribute(state: ParserState): boolean {
   if (!state.eat(":")) return false;
   if (!state.eat(RE_STRING)) return false;
   return true;
+}
+
+function parseElementsWithBraces(
+  state: ParserState,
+  parseElement: (state: ParserState) => boolean,
+): boolean {
+  if (!state.eat("{")) return false;
+  do {
+    if (state.eat("}")) return true;
+    if (!parseElement(state)) return false;
+  } while (state.eat(","));
+  return Boolean(state.eat("}"));
 }
 
 function* iterateTypeTokens(
