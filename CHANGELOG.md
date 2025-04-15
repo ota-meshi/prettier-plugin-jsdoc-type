@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.10
+
+### Patch Changes
+
+- [#21](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/21) [`3d55613`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/3d5561315680e64e9234d2bbeab74dd104a5a1df) Thanks [@ota-meshi](https://github.com/ota-meshi)! - feat: Improved `@import` parsing to be more strict
+
 ## 0.1.9
 
 ### Patch Changes
