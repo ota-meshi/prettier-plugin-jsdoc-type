@@ -33,18 +33,20 @@ export type JsdocImportTagTypeImportAttribute = {
   key: IdentifierToken | StringToken;
   value: StringToken;
 };
-
-type DescriptionPos = {
-  sourceIndex: number;
-  charIndex: number;
-};
-type Pos = {
+export type Pos = {
   number: number;
   /** The offset position within the `type` text. */
   typeOffset: number;
 };
-type Keyword = "type" | "as" | "from" | "with";
-type Punctuator = "*" | ";" | "," | "{" | "}" | ":";
+export type IdentifierToken = BaseToken<"Identifier">;
+export type StringToken = BaseToken<"String">;
+export type SpaceToken = BaseToken<"Whitespace">;
+export type PunctuatorToken = BaseToken<"Punctuator">;
+export type Token =
+  | IdentifierToken
+  | StringToken
+  | SpaceToken
+  | PunctuatorToken;
 type BaseToken<T extends string> = {
   type: T;
   value: string;
@@ -52,11 +54,12 @@ type BaseToken<T extends string> = {
   /** @private */
   _descPos?: DescriptionPos;
 };
-type IdentifierToken = BaseToken<"Identifier">;
-type StringToken = BaseToken<"String">;
-type SpaceToken = BaseToken<"Whitespace">;
-type PunctuatorToken = BaseToken<"Punctuator">;
-type Token = IdentifierToken | StringToken | SpaceToken | PunctuatorToken;
+type DescriptionPos = {
+  sourceIndex: number;
+  charIndex: number;
+};
+type Keyword = "type" | "as" | "from" | "with";
+type Punctuator = "*" | ";" | "," | "{" | "}" | ":";
 type TokenBuilder = (
   line: commentParser.Line,
   pos: DescriptionPos,
