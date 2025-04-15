@@ -1,0 +1,4 @@
+/** @import {   
+ *    Foo 
+ *      } from 'bar'
+ */

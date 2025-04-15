@@ -1,78 +1,134 @@
 import type * as commentParser from "comment-parser";
 
+export type JsdocImportTagSpec = commentParser.Spec & {
+  importTagType?: JsdocImportTagType;
+};
+export type JsdocImportTagType = {
+  type: "JsdocImportTagType";
+  specifiers: (
+    | JsdocImportTagTypeImportSpecifier
+    | JsdocImportTagTypeImportDefaultSpecifier
+    | JsdocImportTagTypeImportNamespaceSpecifier
+  )[];
+  source: StringToken;
+  attributes: JsdocImportTagTypeImportAttribute[];
+  tokens: Token[];
+};
+export type JsdocImportTagTypeImportSpecifier = {
+  type: "JsdocImportTagTypeImportSpecifier";
+  imported: IdentifierToken | StringToken;
+  importKind: "type" | "value";
+  local: IdentifierToken;
+};
+export type JsdocImportTagTypeImportDefaultSpecifier = {
+  type: "JsdocImportTagTypeImportDefaultSpecifier";
+  local: IdentifierToken;
+};
+export type JsdocImportTagTypeImportNamespaceSpecifier = {
+  type: "JsdocImportTagTypeImportNamespaceSpecifier";
+  local: IdentifierToken;
+};
+export type JsdocImportTagTypeImportAttribute = {
+  type: "JsdocImportTagTypeImportAttribute";
+  key: IdentifierToken | StringToken;
+  value: StringToken;
+};
+
+type DescriptionPos = {
+  sourceIndex: number;
+  charIndex: number;
+};
 type Pos = {
-  readonly sourceIndex: number;
-  readonly charIndex: number;
+  number: number;
+  /** The offset position within the `type` text. */
+  typeOffset: number;
 };
 type Keyword = "type" | "as" | "from" | "with";
-type Punctuation = "*" | ";" | "," | "{" | "}" | ":";
-type IdToken = { type: "id"; value: string; pos: Pos };
-type StrToken = { type: "str"; value: string; pos: Pos };
-type SpaceToken = { type: "space"; value: string; pos: Pos };
-type PunctuationToken = {
-  type: Punctuation;
+type Punctuator = "*" | ";" | "," | "{" | "}" | ":";
+type BaseToken<T extends string> = {
+  type: T;
   value: string;
   pos: Pos;
+  /** @private */
+  _descPos?: DescriptionPos;
 };
-type UnknownToken = { type: "unknown"; value: string; pos: Pos };
-type Token = IdToken | StrToken | SpaceToken | PunctuationToken | UnknownToken;
-type TokenBuilder = (text: string, pos: Pos) => Token | null;
+type IdentifierToken = BaseToken<"Identifier">;
+type StringToken = BaseToken<"String">;
+type SpaceToken = BaseToken<"Whitespace">;
+type PunctuatorToken = BaseToken<"Punctuator">;
+type Token = IdentifierToken | StringToken | SpaceToken | PunctuatorToken;
+type TokenBuilder = (
+  line: commentParser.Line,
+  pos: DescriptionPos,
+) => Token | null;
 const TOKEN_BUILDERS: TokenBuilder[] = [
   regexpToTokenBuilder(
     /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy,
-    "id",
+    "Identifier",
   ),
   regexpToTokenBuilder(
     /(?<quote>["'])(?:[^\n\r"'\\]+|(?!\k<quote>)["']|\\(?:\r\n|[\s\S]))\k<quote>/uy,
-    "str",
+    "String",
   ),
-  regexpToTokenBuilder(/\s+/uy, "space"),
-  (text, pos) => {
-    const c = text[pos.charIndex];
+  regexpToTokenBuilder(/\s+/uy, "Whitespace"),
+  (line, descPos) => {
+    const c = line.tokens.description[descPos.charIndex];
     return ["*", ";", ",", "{", "}", ":"].includes(c)
-      ? { type: c as Punctuation, value: c, pos }
+      ? {
+          type: "Punctuator",
+          value: c,
+          pos: { number: line.number, typeOffset: descPos.charIndex },
+          _descPos: descPos,
+        }
       : null;
   },
-  regexpToTokenBuilder(/[\s\S]/uy, "unknown"),
 ];
 
 function regexpToTokenBuilder(re: RegExp, type: Token["type"]): TokenBuilder {
-  return (text, pos) => {
-    re.lastIndex = pos.charIndex;
-    const value = re.exec(text)?.[0];
+  return (line, descPos) => {
+    re.lastIndex = descPos.charIndex;
+    const value = re.exec(line.tokens.description)?.[0];
     if (!value) return null;
-    return { type, value, pos };
+    return {
+      type,
+      value,
+      pos: { number: line.number, typeOffset: descPos.charIndex },
+      _descPos: descPos,
+    };
   };
 }
 
 class Tokenizer {
   private readonly spec: commentParser.Spec;
 
-  private pos: Pos = { sourceIndex: 0, charIndex: 0 };
+  private descPos: DescriptionPos = { sourceIndex: 0, charIndex: 0 };
+
+  public readonly tokens: Token[] = [];
 
   public constructor(spec: commentParser.Spec) {
     this.spec = spec;
   }
 
   public next(): Token | null {
-    const { sourceIndex, charIndex } = this.pos;
+    const { sourceIndex, charIndex } = this.descPos;
     const line = this.spec.source[sourceIndex];
     if (!line) return null;
     const text = line.tokens.description;
     if (text.length <= charIndex) {
-      this.pos = { sourceIndex: sourceIndex + 1, charIndex: 0 };
+      this.descPos = { sourceIndex: sourceIndex + 1, charIndex: 0 };
       return this.next();
     }
     for (const builder of TOKEN_BUILDERS) {
-      const token = builder(text, this.pos);
+      const token = builder(line, this.descPos);
       if (!token) continue;
-      this.pos = {
+      this.descPos = {
         sourceIndex,
         charIndex: charIndex + token.value.length,
       };
+      this.tokens.push(token);
       return token;
     }
-    throw new Error("Unexpected token");
+    return null;
   }
 }
 
@@ -86,23 +142,35 @@ class ParserState {
     this.advance();
   }
 
-  public eat(type: Token["type"]): Token | null {
+  public get tokens(): Token[] {
+    return this.tokenizer.tokens;
+  }
+
+  public eat<T extends Token["type"]>(
+    type: T,
+  ): Extract<Token, { type: T }> | null {
     if (this.current?.type !== type) return null;
     const result = this.current;
     this.advance();
-    return result;
+    return result as Extract<Token, { type: T }>;
   }
 
-  public eatValue(value: Keyword): Token | null {
+  public eatValue(value: Keyword): IdentifierToken | null;
+
+  public eatValue(value: Punctuator): PunctuatorToken | null;
+
+  public eatValue(
+    value: Keyword | Punctuator,
+  ): PunctuatorToken | IdentifierToken | null {
     if (this.current?.value !== value) return null;
     const result = this.current;
     this.advance();
-    return result;
+    return result as PunctuatorToken | IdentifierToken;
   }
 
   public advance(): Token | null {
     this.current = this.tokenizer.next();
-    if (this.current?.type !== "space") {
+    if (this.current?.type !== "Whitespace") {
       return this.current;
     }
     return this.advance();
@@ -113,152 +181,285 @@ export function tokenizeImportType(
   spec: commentParser.Spec,
 ): commentParser.Spec {
   const state = new ParserState(spec);
-  if (!parseImportClause(state)) return spec;
+  let specifiers;
+  if (!(specifiers = parseImportClause(state))) return spec;
   if (!state.eatValue("from")) return spec;
-  let lastToken = state.eat("str");
-  if (!lastToken) return spec;
+  const source = state.eat("String");
+  if (!source) return spec;
 
-  const semi = state.eat(";");
+  const node: JsdocImportTagType = {
+    type: "JsdocImportTagType",
+    specifiers,
+    source,
+    attributes: [],
+    tokens: [],
+  };
+
+  let lastToken: Token = source;
+
+  const semi = state.eatValue(";");
   if (semi) {
     lastToken = semi;
   } else if (state.eatValue("with")) {
-    const attrsToken = parseImportAttributes(state);
-    if (attrsToken) {
-      lastToken = state.eat(";") || attrsToken;
+    const attributes = parseImportAttributes(state);
+    if (attributes) {
+      node.attributes = attributes.elements;
+      lastToken = state.eatValue(";") || attributes.close;
     }
   }
 
+  postprocess(spec, state.tokens, node, {
+    sourceIndex: lastToken._descPos!.sourceIndex,
+    charIndex: lastToken._descPos!.charIndex + lastToken.value.length,
+  });
+  return spec;
+}
+
+function postprocess(
+  spec: commentParser.Spec,
+  astTokens: Token[],
+  node: JsdocImportTagType,
+  endDescPos: DescriptionPos,
+) {
+  // From the generated AST tokens, extract only tokens that are within the Node range.
+  // Also, remove _descPos.
+  for (const t of astTokens) {
+    const descPos = t._descPos!;
+    delete t._descPos;
+    if (
+      descPos.sourceIndex < endDescPos.sourceIndex ||
+      (descPos.sourceIndex === endDescPos.sourceIndex &&
+        descPos.charIndex < endDescPos.charIndex)
+    ) {
+      node.tokens.push(t);
+    }
+  }
+
+  // Update the source type of the comment-parser Spec.
   const parts: string[] = [];
   let offset = 0;
-  for (const { tokens, type, first } of iterateTypeTokens(
-    {
-      sourceIndex: lastToken.pos.sourceIndex,
-      charIndex: lastToken.pos.charIndex + lastToken.value.length,
-    },
-    spec,
-  )) {
+  for (const { line, type, first } of iterateTypeLines(endDescPos, spec)) {
+    const tokens = line.tokens;
     tokens.type = type;
     if (first) {
       offset = tokens.postDelimiter.length;
     } else {
-      tokens.type = tokens.postDelimiter.slice(offset) + type;
-      tokens.postDelimiter = tokens.postDelimiter.slice(0, offset);
+      const preType = tokens.postDelimiter.slice(offset);
+      if (preType) {
+        tokens.type = preType + type;
+        tokens.postDelimiter = tokens.postDelimiter.slice(0, offset);
+
+        // Adjust the position of the AST tokens
+        for (const t of node.tokens) {
+          if (t.pos.number === line.number) t.pos.typeOffset += preType.length;
+        }
+      }
     }
-    [tokens.postType, tokens.description] = splitSpace(
-      tokens.description.slice(type.length),
-    );
+    tokens.description = tokens.description.slice(type.length);
+    const spaces = /^\s+/u.exec(tokens.description)?.[0];
+    if (spaces) {
+      tokens.postType = spaces;
+      tokens.description = tokens.description.slice(spaces.length);
+    }
     parts.push(tokens.type);
   }
 
   spec.type = parts.join("\n");
-  return spec;
+  (spec as JsdocImportTagSpec).importTagType = node;
 }
 
-function parseImportClause(state: ParserState): Token | null {
-  let token;
-  if ((token = parseNamespaceImport(state))) {
-    return token;
+function parseImportClause(
+  state: ParserState,
+):
+  | (
+      | JsdocImportTagTypeImportSpecifier
+      | JsdocImportTagTypeImportDefaultSpecifier
+      | JsdocImportTagTypeImportNamespaceSpecifier
+    )[]
+  | null {
+  if (state.eatValue("*")) {
+    // import * as X from "mod"
+    const local = state.eatValue("as") && state.eat("Identifier");
+    return (
+      local && [
+        {
+          type: "JsdocImportTagTypeImportNamespaceSpecifier",
+          local,
+        },
+      ]
+    );
   }
-  if ((token = state.eat("id"))) {
-    // Default import
-    if (state.eat(",")) {
-      return parseNamedImports(state);
+  const local = state.eat("Identifier");
+  if (local) {
+    const defaultSpec: JsdocImportTagTypeImportDefaultSpecifier = {
+      type: "JsdocImportTagTypeImportDefaultSpecifier",
+      local,
+    };
+    if (!state.eatValue(",")) {
+      // import X from "mod"
+      return [defaultSpec];
     }
-    return token;
+    // import X, {...} from "mod"
+    const specifiers = parseNamedImports(state);
+    return specifiers && [defaultSpec, ...specifiers];
   }
 
+  // import {...} from "mod"
   return parseNamedImports(state);
 }
 
-function parseNamespaceImport(state: ParserState): Token | null {
-  return state.eat("*") && state.eatValue("as") && state.eat("id");
+function parseNamedImports(
+  state: ParserState,
+): JsdocImportTagTypeImportSpecifier[] | null {
+  const parsed = parseElementsWithBraces(state, parseImportSpec);
+  return parsed && parsed.elements;
 }
 
-function parseNamedImports(state: ParserState): Token | null {
-  return parseElementsWithBraces(state, parseImportSpec);
-}
-
-function parseImportSpec(state: ParserState): Token | null {
-  let typeToken: Token | null = null;
-  if ((typeToken = state.eatValue("type"))) {
-    let asToken1;
-    if ((asToken1 = state.eatValue("as"))) {
-      const asToken2 = state.eatValue("as");
-      // import { type as as } from "mod"
-      // import { type as as as } from "mod"
-      // import { type as as X } from "mod"
-
+function parseImportSpec(
+  state: ParserState,
+): JsdocImportTagTypeImportSpecifier | null {
+  let type: Token | null = null;
+  if ((type = state.eatValue("type"))) {
+    let as1;
+    if ((as1 = state.eatValue("as"))) {
+      const as2 = state.eatValue("as");
+      const local = state.eat("Identifier");
+      if (local && as2) {
+        // import { type as as as } from "mod"
+        // import { type as as X } from "mod"
+        return {
+          type: "JsdocImportTagTypeImportSpecifier",
+          importKind: "type",
+          imported: as1,
+          local,
+        };
+      }
+      const valueLocal = as2 || local;
+      if (valueLocal) {
+        // import { type as X } from "mod"
+        // import { type as as } from "mod"
+        return {
+          type: "JsdocImportTagTypeImportSpecifier",
+          importKind: "value",
+          imported: type,
+          local: valueLocal,
+        };
+      }
       // import { type as } from "mod"
-      // import { type as X } from "mod"
-      return state.eat("id") || asToken2 || asToken1;
+      return {
+        type: "JsdocImportTagTypeImportSpecifier",
+        importKind: "type",
+        imported: as1,
+        local: as1,
+      };
     }
   }
 
-  const keyToken = state.eat("id") || state.eat("str");
-  if (!keyToken) {
-    // Maybe `import { type } from "mod"`
-    return typeToken;
+  const imported = state.eat("Identifier") || state.eat("String");
+  if (!imported) {
+    return (
+      type && {
+        // `import { type } from "mod"`
+        type: "JsdocImportTagTypeImportSpecifier",
+        importKind: "value",
+        imported: type,
+        local: type,
+      }
+    );
   }
   if (state.eatValue("as")) {
-    return state.eat("id");
+    const local = state.eat("Identifier");
+    return (
+      local && {
+        // `import { x as X } from "mod"`
+        // `import { 'str' as X } from "mod"`
+        type: "JsdocImportTagTypeImportSpecifier",
+        importKind: type ? "type" : "value",
+        imported,
+        local,
+      }
+    );
   }
-  return keyToken;
+  return imported.type === "Identifier"
+    ? {
+        // `import { X } from "mod"`
+        type: "JsdocImportTagTypeImportSpecifier",
+        importKind: type ? "type" : "value",
+        imported,
+        local: imported,
+      }
+    : null;
 }
 
-function parseImportAttributes(state: ParserState): Token | null {
+function parseImportAttributes(state: ParserState): {
+  elements: JsdocImportTagTypeImportAttribute[];
+  close: PunctuatorToken;
+} | null {
   return parseElementsWithBraces(state, parseImportAttribute);
 }
 
-function parseImportAttribute(state: ParserState): Token | null {
-  const keyToken = state.eat("id") || state.eat("str");
-  if (!keyToken) return null;
-  if (!state.eat(":")) return null;
-  return state.eat("str");
-}
-
-function parseElementsWithBraces(
+function parseImportAttribute(
   state: ParserState,
-  parseElement: (state: ParserState) => Token | null,
-): Token | null {
-  if (!state.eat("{")) return null;
-  do {
-    const close = state.eat("}");
-    if (close) return close;
-    if (!parseElement(state)) return null;
-  } while (state.eat(","));
-  return state.eat("}");
+): JsdocImportTagTypeImportAttribute | null {
+  const key = state.eat("Identifier") || state.eat("String");
+  if (!key) return null;
+  if (!state.eatValue(":")) return null;
+  const value = state.eat("String");
+  return (
+    value && {
+      type: "JsdocImportTagTypeImportAttribute",
+      key,
+      value,
+    }
+  );
 }
 
-function* iterateTypeTokens(
-  endPos: Pos,
+function parseElementsWithBraces<E>(
+  state: ParserState,
+  parseElement: (state: ParserState) => E | null,
+): { elements: E[]; close: PunctuatorToken } | null {
+  const elements: E[] = [];
+  if (!state.eatValue("{")) return null;
+  do {
+    const close = state.eatValue("}");
+    if (close) return { elements, close };
+    const element = parseElement(state);
+    if (!element) return null;
+    elements.push(element);
+  } while (state.eatValue(","));
+  const close = state.eatValue("}");
+  return close && { elements, close };
+}
+
+function* iterateTypeLines(
+  endDescPos: DescriptionPos,
   spec: commentParser.Spec,
 ): Iterable<{
-  tokens: commentParser.Tokens;
+  line: commentParser.Line;
   type: string;
   first: boolean;
 }> {
   const source = spec.source;
-  const lastLine = source[endPos.sourceIndex];
-  for (let sourceIndex = 0; sourceIndex < endPos.sourceIndex; sourceIndex++) {
+  const lastLine = source[endDescPos.sourceIndex];
+  for (
+    let sourceIndex = 0;
+    sourceIndex < endDescPos.sourceIndex;
+    sourceIndex++
+  ) {
     const line = source[sourceIndex];
     if (!line) continue;
     yield {
-      tokens: line.tokens,
+      line,
       type: line.tokens.description,
       first: sourceIndex === 0,
     };
   }
-  const line = source[endPos.sourceIndex];
+  const line = source[endDescPos.sourceIndex];
   if (!line) return;
-  const type = lastLine.tokens.description.slice(0, endPos.charIndex);
+  const type = lastLine.tokens.description.slice(0, endDescPos.charIndex);
   yield {
-    tokens: lastLine.tokens,
+    line: lastLine,
     type,
-    first: endPos.sourceIndex === 0,
+    first: endDescPos.sourceIndex === 0,
   };
-}
-
-function splitSpace(source: string): [string, string] {
-  const spaces = /^\s+/u.exec(source)?.[0];
-  return spaces ? [spaces, source.slice(spaces.length)] : ["", source];
 }

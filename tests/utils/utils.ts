@@ -2,16 +2,10 @@ import fs from "fs";
 import path from "path";
 import type { ParserOptions } from "prettier";
 
-export function* listupFixtures(dir: string): IterableIterator<{
-  input: string;
-  inputFileName: string;
-  outputFileName: string;
-  config: Partial<ParserOptions>;
-}> {
-  yield* listupFixturesImpl(dir);
-}
-
-function* listupFixturesImpl(dir: string): IterableIterator<{
+export function* listupFixtures(
+  dir: string,
+  options?: { outputExt: string },
+): IterableIterator<{
   input: string;
   inputFileName: string;
   outputFileName: string;
@@ -25,7 +19,7 @@ function* listupFixturesImpl(dir: string): IterableIterator<{
     if (!baseName.endsWith("input")) continue;
     const outputFileName = path.join(
       dirent.parentPath,
-      baseName.replace(/input$/u, "output") + ext,
+      baseName.replace(/input$/u, "output") + (options?.outputExt ?? ext),
     );
     const configFileName = path.join(
       dirent.parentPath,

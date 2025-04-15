@@ -34,7 +34,7 @@ describe("Test for format", () => {
           describe(inputFileName, () => {
             it("should be the formatted result expect.", async () => {
               setForceUseTypescript(forceUsedTypescript);
-              const code = await prettier.format(input, {
+              const formatted = await prettier.format(input, {
                 ...config,
                 filepath: inputFileName,
                 plugins: [...(config?.plugins ?? []), plugin],
@@ -44,23 +44,23 @@ describe("Test for format", () => {
                 (process.argv.includes("--update") &&
                   forceUsedTypescript === false)
               ) {
-                fs.writeFileSync(outputFileName, code, "utf8");
+                fs.writeFileSync(outputFileName, formatted, "utf8");
               }
               const output = fs.readFileSync(outputFileName, "utf8");
-              assert.strictEqual(code, output);
+              assert.strictEqual(formatted, output);
 
-              const codeWithoutPlugin = await prettier.format(input, {
+              const formattedWithoutPlugin = await prettier.format(input, {
                 ...config,
                 filepath: inputFileName,
                 plugins: [...(config?.plugins ?? [])],
               });
 
               if (textOption?.sameOutputAsWithoutPlugin) {
-                assert.strictEqual(code, codeWithoutPlugin);
+                assert.strictEqual(formatted, formattedWithoutPlugin);
               } else {
                 assert.notStrictEqual(
-                  code,
-                  codeWithoutPlugin,
+                  formatted,
+                  formattedWithoutPlugin,
                   "Test cases have the same format without the plugin.",
                 );
               }

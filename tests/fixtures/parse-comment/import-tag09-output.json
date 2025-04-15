@@ -1,0 +1,263 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "",
+      "type": "*  as X\n   from\n'foo'",
+      "optional": false,
+      "description": "          ",
+      "problems": [],
+      "source": [
+        {
+          "number": 1,
+          "source": " * @import *  as X",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "*  as X",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 2,
+          "source": " *    from",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "   from",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 3,
+          "source": "          'foo'",
+          "tokens": {
+            "start": "          ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "'foo'",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 4,
+          "source": " */",
+          "tokens": {
+            "start": " ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "",
+            "postType": "",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportNamespaceSpecifier",
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 1,
+                "typeOffset": 6
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'foo'",
+          "pos": {
+            "number": 3,
+            "typeOffset": 0
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "*",
+            "pos": {
+              "number": 1,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "  ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "as",
+            "pos": {
+              "number": 1,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 1,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 2,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "String",
+            "value": "'foo'",
+            "pos": {
+              "number": 3,
+              "typeOffset": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** ",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 1,
+      "source": " * @import *  as X",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "*  as X",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 2,
+      "source": " *    from",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "   from",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 3,
+      "source": "          'foo'",
+      "tokens": {
+        "start": "          ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "'foo'",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 4,
+      "source": " */",
+      "tokens": {
+        "start": " ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}
