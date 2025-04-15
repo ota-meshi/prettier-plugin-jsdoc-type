@@ -1,0 +1,796 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "",
+      "type": "{X as Y,} from 'x'",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 1,
+          "source": " * @import {X as Y,} from 'x'",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "{X as Y,} from 'x'",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 1,
+                "typeOffset": 1
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Y",
+              "pos": {
+                "number": 1,
+                "typeOffset": 6
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'x'",
+          "pos": {
+            "number": 1,
+            "typeOffset": 15
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 1,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 1,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 2
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "as",
+            "pos": {
+              "number": 1,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Y",
+            "pos": {
+              "number": 1,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 1,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 1,
+              "typeOffset": 8
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 9
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 1,
+              "typeOffset": 10
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 14
+            }
+          },
+          {
+            "type": "String",
+            "value": "'x'",
+            "pos": {
+              "number": 1,
+              "typeOffset": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tag": "import",
+      "name": "",
+      "type": "{X,} from 'x'",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 2,
+          "source": " * @import {X,} from 'x'",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "{X,} from 'x'",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 2,
+                "typeOffset": 1
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 2,
+                "typeOffset": 1
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'x'",
+          "pos": {
+            "number": 2,
+            "typeOffset": 10
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 2,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 2,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 2
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 2,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 4
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 2,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 9
+            }
+          },
+          {
+            "type": "String",
+            "value": "'x'",
+            "pos": {
+              "number": 2,
+              "typeOffset": 10
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tag": "import",
+      "name": "",
+      "type": "X, {Y,} from 'x'",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 3,
+          "source": " * @import X, {Y,} from 'x'",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "X, {Y,} from 'x'",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportDefaultSpecifier",
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 3,
+                "typeOffset": 0
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "Y",
+              "pos": {
+                "number": 3,
+                "typeOffset": 4
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Y",
+              "pos": {
+                "number": 3,
+                "typeOffset": 4
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'x'",
+          "pos": {
+            "number": 3,
+            "typeOffset": 13
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 3,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 2
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 3,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Y",
+            "pos": {
+              "number": 3,
+              "typeOffset": 4
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 3,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 3,
+              "typeOffset": 8
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 12
+            }
+          },
+          {
+            "type": "String",
+            "value": "'x'",
+            "pos": {
+              "number": 3,
+              "typeOffset": 13
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tag": "import",
+      "name": "",
+      "type": "X from 'x' with { type: 'json', }",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 4,
+          "source": " * @import X from 'x' with { type: 'json', }",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "X from 'x' with { type: 'json', }",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 5,
+          "source": " */",
+          "tokens": {
+            "start": " ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "",
+            "postType": "",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportDefaultSpecifier",
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 4,
+                "typeOffset": 0
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'x'",
+          "pos": {
+            "number": 4,
+            "typeOffset": 7
+          }
+        },
+        "attributes": [
+          {
+            "type": "JsdocImportTagTypeImportAttribute",
+            "key": {
+              "type": "Identifier",
+              "value": "type",
+              "pos": {
+                "number": 4,
+                "typeOffset": 18
+              }
+            },
+            "value": {
+              "type": "String",
+              "value": "'json'",
+              "pos": {
+                "number": 4,
+                "typeOffset": 24
+              }
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 4,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 4,
+              "typeOffset": 2
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "String",
+            "value": "'x'",
+            "pos": {
+              "number": 4,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 10
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "with",
+            "pos": {
+              "number": 4,
+              "typeOffset": 11
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 15
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 4,
+              "typeOffset": 16
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 17
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "type",
+            "pos": {
+              "number": 4,
+              "typeOffset": 18
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ":",
+            "pos": {
+              "number": 4,
+              "typeOffset": 22
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 23
+            }
+          },
+          {
+            "type": "String",
+            "value": "'json'",
+            "pos": {
+              "number": 4,
+              "typeOffset": 24
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 4,
+              "typeOffset": 30
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 31
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 4,
+              "typeOffset": 32
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** ",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 1,
+      "source": " * @import {X as Y,} from 'x'",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "{X as Y,} from 'x'",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 2,
+      "source": " * @import {X,} from 'x'",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "{X,} from 'x'",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 3,
+      "source": " * @import X, {Y,} from 'x'",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "X, {Y,} from 'x'",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 4,
+      "source": " * @import X from 'x' with { type: 'json', }",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "X from 'x' with { type: 'json', }",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 5,
+      "source": " */",
+      "tokens": {
+        "start": " ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}

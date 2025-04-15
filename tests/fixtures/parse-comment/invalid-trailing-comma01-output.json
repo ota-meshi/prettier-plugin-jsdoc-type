@@ -1,0 +1,108 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "X,",
+      "type": "",
+      "optional": false,
+      "description": "from 'x'",
+      "problems": [],
+      "source": [
+        {
+          "number": 1,
+          "source": " * @import X, from 'x'",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "X,",
+            "postName": " ",
+            "type": "",
+            "postType": "",
+            "description": "from 'x'",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 2,
+          "source": " */",
+          "tokens": {
+            "start": " ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "",
+            "postType": "",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ]
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** ",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 1,
+      "source": " * @import X, from 'x'",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "X,",
+        "postName": " ",
+        "type": "",
+        "postType": "",
+        "description": "from 'x'",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 2,
+      "source": " */",
+      "tokens": {
+        "start": " ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}

@@ -1,0 +1,371 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "'Comment'",
+      "type": "*  as X\n   from\n\"../../../package.json\"     with { type: 'json' }",
+      "optional": false,
+      "description": "          ",
+      "problems": [],
+      "source": [
+        {
+          "number": 1,
+          "source": " * @import *  as X",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "*  as X",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 2,
+          "source": " *    from",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "   from",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 3,
+          "source": "          \"../../../package.json\"     with { type: 'json' } 'Comment'",
+          "tokens": {
+            "start": "          ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "'Comment'",
+            "postName": "",
+            "type": "\"../../../package.json\"     with { type: 'json' }",
+            "postType": " ",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 4,
+          "source": " */",
+          "tokens": {
+            "start": " ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "",
+            "postType": "",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportNamespaceSpecifier",
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 1,
+                "typeOffset": 6
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "\"../../../package.json\"",
+          "pos": {
+            "number": 3,
+            "typeOffset": 0
+          }
+        },
+        "attributes": [
+          {
+            "type": "JsdocImportTagTypeImportAttribute",
+            "key": {
+              "type": "Identifier",
+              "value": "type",
+              "pos": {
+                "number": 3,
+                "typeOffset": 35
+              }
+            },
+            "value": {
+              "type": "String",
+              "value": "'json'",
+              "pos": {
+                "number": 3,
+                "typeOffset": 41
+              }
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "*",
+            "pos": {
+              "number": 1,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "  ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "as",
+            "pos": {
+              "number": 1,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 1,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 2,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "String",
+            "value": "\"../../../package.json\"",
+            "pos": {
+              "number": 3,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "     ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 23
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "with",
+            "pos": {
+              "number": 3,
+              "typeOffset": 28
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 32
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 3,
+              "typeOffset": 33
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 34
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "type",
+            "pos": {
+              "number": 3,
+              "typeOffset": 35
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ":",
+            "pos": {
+              "number": 3,
+              "typeOffset": 39
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 40
+            }
+          },
+          {
+            "type": "String",
+            "value": "'json'",
+            "pos": {
+              "number": 3,
+              "typeOffset": 41
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 47
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 3,
+              "typeOffset": 48
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** ",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 1,
+      "source": " * @import *  as X",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "*  as X",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 2,
+      "source": " *    from",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "   from",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 3,
+      "source": "          \"../../../package.json\"     with { type: 'json' } 'Comment'",
+      "tokens": {
+        "start": "          ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "'Comment'",
+        "postName": "",
+        "type": "\"../../../package.json\"     with { type: 'json' }",
+        "postType": " ",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 4,
+      "source": " */",
+      "tokens": {
+        "start": " ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}

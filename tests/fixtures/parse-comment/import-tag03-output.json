@@ -1,0 +1,1434 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "",
+      "type": "{   \n   A ,\n     B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,\n    U, V, W, X, Y, Z,\n     } from 'foo'",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 0,
+          "source": "/** @import {   ",
+          "tokens": {
+            "start": "",
+            "delimiter": "/**",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": " ",
+            "name": "",
+            "postName": "",
+            "type": "{   ",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 1,
+          "source": " *    A ,",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "   A ,",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 2,
+          "source": " *      B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "     B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 3,
+          "source": " *     U, V, W, X, Y, Z,",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "    U, V, W, X, Y, Z,",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 4,
+          "source": " *      } from 'foo'",
+          "tokens": {
+            "start": " ",
+            "delimiter": "*",
+            "postDelimiter": " ",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "     } from 'foo'",
+            "postType": "",
+            "description": "",
+            "end": "",
+            "lineEnd": ""
+          }
+        },
+        {
+          "number": 5,
+          "source": " */",
+          "tokens": {
+            "start": " ",
+            "delimiter": "",
+            "postDelimiter": "",
+            "tag": "",
+            "postTag": "",
+            "name": "",
+            "postName": "",
+            "type": "",
+            "postType": "",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "A",
+              "pos": {
+                "number": 1,
+                "typeOffset": 3
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "A",
+              "pos": {
+                "number": 1,
+                "typeOffset": 3
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "B",
+              "pos": {
+                "number": 2,
+                "typeOffset": 5
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "B",
+              "pos": {
+                "number": 2,
+                "typeOffset": 5
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "C",
+              "pos": {
+                "number": 2,
+                "typeOffset": 8
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "C",
+              "pos": {
+                "number": 2,
+                "typeOffset": 8
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "D",
+              "pos": {
+                "number": 2,
+                "typeOffset": 11
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "D",
+              "pos": {
+                "number": 2,
+                "typeOffset": 11
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "E",
+              "pos": {
+                "number": 2,
+                "typeOffset": 14
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "E",
+              "pos": {
+                "number": 2,
+                "typeOffset": 14
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "F",
+              "pos": {
+                "number": 2,
+                "typeOffset": 17
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "F",
+              "pos": {
+                "number": 2,
+                "typeOffset": 17
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "G",
+              "pos": {
+                "number": 2,
+                "typeOffset": 20
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "G",
+              "pos": {
+                "number": 2,
+                "typeOffset": 20
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "H",
+              "pos": {
+                "number": 2,
+                "typeOffset": 23
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "H",
+              "pos": {
+                "number": 2,
+                "typeOffset": 23
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "I",
+              "pos": {
+                "number": 2,
+                "typeOffset": 26
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "I",
+              "pos": {
+                "number": 2,
+                "typeOffset": 26
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "J",
+              "pos": {
+                "number": 2,
+                "typeOffset": 29
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "J",
+              "pos": {
+                "number": 2,
+                "typeOffset": 29
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "K",
+              "pos": {
+                "number": 2,
+                "typeOffset": 32
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "K",
+              "pos": {
+                "number": 2,
+                "typeOffset": 32
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "L",
+              "pos": {
+                "number": 2,
+                "typeOffset": 35
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "L",
+              "pos": {
+                "number": 2,
+                "typeOffset": 35
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "M",
+              "pos": {
+                "number": 2,
+                "typeOffset": 38
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "M",
+              "pos": {
+                "number": 2,
+                "typeOffset": 38
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "N",
+              "pos": {
+                "number": 2,
+                "typeOffset": 41
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "N",
+              "pos": {
+                "number": 2,
+                "typeOffset": 41
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "O",
+              "pos": {
+                "number": 2,
+                "typeOffset": 44
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "O",
+              "pos": {
+                "number": 2,
+                "typeOffset": 44
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "P",
+              "pos": {
+                "number": 2,
+                "typeOffset": 47
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "P",
+              "pos": {
+                "number": 2,
+                "typeOffset": 47
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "Q",
+              "pos": {
+                "number": 2,
+                "typeOffset": 50
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Q",
+              "pos": {
+                "number": 2,
+                "typeOffset": 50
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "R",
+              "pos": {
+                "number": 2,
+                "typeOffset": 53
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "R",
+              "pos": {
+                "number": 2,
+                "typeOffset": 53
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "S",
+              "pos": {
+                "number": 2,
+                "typeOffset": 56
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "S",
+              "pos": {
+                "number": 2,
+                "typeOffset": 56
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "T",
+              "pos": {
+                "number": 2,
+                "typeOffset": 59
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "T",
+              "pos": {
+                "number": 2,
+                "typeOffset": 59
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "U",
+              "pos": {
+                "number": 3,
+                "typeOffset": 4
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "U",
+              "pos": {
+                "number": 3,
+                "typeOffset": 4
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "V",
+              "pos": {
+                "number": 3,
+                "typeOffset": 7
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "V",
+              "pos": {
+                "number": 3,
+                "typeOffset": 7
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "W",
+              "pos": {
+                "number": 3,
+                "typeOffset": 10
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "W",
+              "pos": {
+                "number": 3,
+                "typeOffset": 10
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 3,
+                "typeOffset": 13
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "X",
+              "pos": {
+                "number": 3,
+                "typeOffset": 13
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "Y",
+              "pos": {
+                "number": 3,
+                "typeOffset": 16
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Y",
+              "pos": {
+                "number": 3,
+                "typeOffset": 16
+              }
+            }
+          },
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "Z",
+              "pos": {
+                "number": 3,
+                "typeOffset": 19
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Z",
+              "pos": {
+                "number": 3,
+                "typeOffset": 19
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'foo'",
+          "pos": {
+            "number": 4,
+            "typeOffset": 12
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 0,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "   ",
+            "pos": {
+              "number": 0,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "A",
+            "pos": {
+              "number": 1,
+              "typeOffset": 3
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 1,
+              "typeOffset": 4
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 1,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "B",
+            "pos": {
+              "number": 2,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "C",
+            "pos": {
+              "number": 2,
+              "typeOffset": 8
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 9
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 10
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "D",
+            "pos": {
+              "number": 2,
+              "typeOffset": 11
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 12
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 13
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "E",
+            "pos": {
+              "number": 2,
+              "typeOffset": 14
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 15
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 16
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "F",
+            "pos": {
+              "number": 2,
+              "typeOffset": 17
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 18
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 19
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "G",
+            "pos": {
+              "number": 2,
+              "typeOffset": 20
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 21
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 22
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "H",
+            "pos": {
+              "number": 2,
+              "typeOffset": 23
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 24
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 25
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "I",
+            "pos": {
+              "number": 2,
+              "typeOffset": 26
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 27
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 28
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "J",
+            "pos": {
+              "number": 2,
+              "typeOffset": 29
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 30
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 31
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "K",
+            "pos": {
+              "number": 2,
+              "typeOffset": 32
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 33
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 34
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "L",
+            "pos": {
+              "number": 2,
+              "typeOffset": 35
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 36
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 37
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "M",
+            "pos": {
+              "number": 2,
+              "typeOffset": 38
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 39
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 40
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "N",
+            "pos": {
+              "number": 2,
+              "typeOffset": 41
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 42
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 43
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "O",
+            "pos": {
+              "number": 2,
+              "typeOffset": 44
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 45
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 46
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "P",
+            "pos": {
+              "number": 2,
+              "typeOffset": 47
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 48
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 49
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Q",
+            "pos": {
+              "number": 2,
+              "typeOffset": 50
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 51
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 52
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "R",
+            "pos": {
+              "number": 2,
+              "typeOffset": 53
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 54
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 55
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "S",
+            "pos": {
+              "number": 2,
+              "typeOffset": 56
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 57
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 2,
+              "typeOffset": 58
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "T",
+            "pos": {
+              "number": 2,
+              "typeOffset": 59
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 2,
+              "typeOffset": 60
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "U",
+            "pos": {
+              "number": 3,
+              "typeOffset": 4
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "V",
+            "pos": {
+              "number": 3,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 8
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 9
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "W",
+            "pos": {
+              "number": 3,
+              "typeOffset": 10
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 11
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 12
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "X",
+            "pos": {
+              "number": 3,
+              "typeOffset": 13
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 14
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 15
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Y",
+            "pos": {
+              "number": 3,
+              "typeOffset": 16
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 17
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 3,
+              "typeOffset": 18
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Z",
+            "pos": {
+              "number": 3,
+              "typeOffset": 19
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": ",",
+            "pos": {
+              "number": 3,
+              "typeOffset": 20
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 4,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 6
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 4,
+              "typeOffset": 7
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 4,
+              "typeOffset": 11
+            }
+          },
+          {
+            "type": "String",
+            "value": "'foo'",
+            "pos": {
+              "number": 4,
+              "typeOffset": 12
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** @import {   ",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": " ",
+        "name": "",
+        "postName": "",
+        "type": "{   ",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 1,
+      "source": " *    A ,",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "   A ,",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 2,
+      "source": " *      B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "     B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T,",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 3,
+      "source": " *     U, V, W, X, Y, Z,",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "    U, V, W, X, Y, Z,",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 4,
+      "source": " *      } from 'foo'",
+      "tokens": {
+        "start": " ",
+        "delimiter": "*",
+        "postDelimiter": " ",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "     } from 'foo'",
+        "postType": "",
+        "description": "",
+        "end": "",
+        "lineEnd": ""
+      }
+    },
+    {
+      "number": 5,
+      "source": " */",
+      "tokens": {
+        "start": " ",
+        "delimiter": "",
+        "postDelimiter": "",
+        "tag": "",
+        "postTag": "",
+        "name": "",
+        "postName": "",
+        "type": "",
+        "postType": "",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}

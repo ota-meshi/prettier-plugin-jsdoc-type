@@ -1,0 +1,162 @@
+{
+  "description": "",
+  "tags": [
+    {
+      "tag": "import",
+      "name": "",
+      "type": "{    Foo      } from 'bar'",
+      "optional": false,
+      "description": "",
+      "problems": [],
+      "source": [
+        {
+          "number": 0,
+          "source": "/** @import   {    Foo      } from 'bar' */",
+          "tokens": {
+            "start": "",
+            "delimiter": "/**",
+            "postDelimiter": " ",
+            "tag": "@import",
+            "postTag": "   ",
+            "name": "",
+            "postName": "",
+            "type": "{    Foo      } from 'bar'",
+            "postType": " ",
+            "description": "",
+            "end": "*/",
+            "lineEnd": ""
+          }
+        }
+      ],
+      "importTagType": {
+        "type": "JsdocImportTagType",
+        "specifiers": [
+          {
+            "type": "JsdocImportTagTypeImportSpecifier",
+            "importKind": "value",
+            "imported": {
+              "type": "Identifier",
+              "value": "Foo",
+              "pos": {
+                "number": 0,
+                "typeOffset": 5
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "value": "Foo",
+              "pos": {
+                "number": 0,
+                "typeOffset": 5
+              }
+            }
+          }
+        ],
+        "source": {
+          "type": "String",
+          "value": "'bar'",
+          "pos": {
+            "number": 0,
+            "typeOffset": 21
+          }
+        },
+        "attributes": [],
+        "tokens": [
+          {
+            "type": "Punctuator",
+            "value": "{",
+            "pos": {
+              "number": 0,
+              "typeOffset": 0
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "    ",
+            "pos": {
+              "number": 0,
+              "typeOffset": 1
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "Foo",
+            "pos": {
+              "number": 0,
+              "typeOffset": 5
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": "      ",
+            "pos": {
+              "number": 0,
+              "typeOffset": 8
+            }
+          },
+          {
+            "type": "Punctuator",
+            "value": "}",
+            "pos": {
+              "number": 0,
+              "typeOffset": 14
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 0,
+              "typeOffset": 15
+            }
+          },
+          {
+            "type": "Identifier",
+            "value": "from",
+            "pos": {
+              "number": 0,
+              "typeOffset": 16
+            }
+          },
+          {
+            "type": "Whitespace",
+            "value": " ",
+            "pos": {
+              "number": 0,
+              "typeOffset": 20
+            }
+          },
+          {
+            "type": "String",
+            "value": "'bar'",
+            "pos": {
+              "number": 0,
+              "typeOffset": 21
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "source": [
+    {
+      "number": 0,
+      "source": "/** @import   {    Foo      } from 'bar' */",
+      "tokens": {
+        "start": "",
+        "delimiter": "/**",
+        "postDelimiter": " ",
+        "tag": "@import",
+        "postTag": "   ",
+        "name": "",
+        "postName": "",
+        "type": "{    Foo      } from 'bar'",
+        "postType": " ",
+        "description": "",
+        "end": "*/",
+        "lineEnd": ""
+      }
+    }
+  ],
+  "problems": []
+}
