@@ -1,5 +1,13 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.11
+
+### Patch Changes
+
+- [#23](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/23) [`4f588d0`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/4f588d0e85f24ecfb8bf58b411c9c1c6e9216f27) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: issue for trailing `=` and `?`
+
+- [#23](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/23) [`4f588d0`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/4f588d0e85f24ecfb8bf58b411c9c1c6e9216f27) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: issue for jsdoc function type
+
 ## 0.1.10
 
 ### Patch Changes
