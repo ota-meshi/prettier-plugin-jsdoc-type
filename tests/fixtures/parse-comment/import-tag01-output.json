@@ -32,32 +32,61 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "value",
             "imported": {
               "type": "Identifier",
-              "value": "Foo",
-              "pos": {
-                "number": 0,
-                "typeOffset": 5
+              "name": "Foo",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 5
+                },
+                "end": {
+                  "line": 1,
+                  "column": 8
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "Foo",
-              "pos": {
-                "number": 0,
-                "typeOffset": 5
+              "name": "Foo",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 5
+                },
+                "end": {
+                  "line": 1,
+                  "column": 8
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 5
+              },
+              "end": {
+                "line": 1,
+                "column": 8
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'bar'",
-          "pos": {
-            "number": 0,
-            "typeOffset": 21
+          "type": "Literal",
+          "value": "bar",
+          "raw": "'bar'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 21
+            },
+            "end": {
+              "line": 1,
+              "column": 26
+            }
           }
         },
         "attributes": [],
@@ -65,76 +94,84 @@
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 0,
-              "typeOffset": 0
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "    ",
-            "pos": {
-              "number": 0,
-              "typeOffset": 1
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "Foo",
-            "pos": {
-              "number": 0,
-              "typeOffset": 5
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "      ",
-            "pos": {
-              "number": 0,
-              "typeOffset": 8
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 5
+              },
+              "end": {
+                "line": 1,
+                "column": 8
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 0,
-              "typeOffset": 14
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 0,
-              "typeOffset": 15
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 14
+              },
+              "end": {
+                "line": 1,
+                "column": 15
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 0,
-              "typeOffset": 16
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 0,
-              "typeOffset": 20
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "line": 1,
+                "column": 20
+              }
             }
           },
           {
             "type": "String",
             "value": "'bar'",
-            "pos": {
-              "number": 0,
-              "typeOffset": 21
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 21
+              },
+              "end": {
+                "line": 1,
+                "column": 26
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 26
+          }
+        }
       }
     }
   ],

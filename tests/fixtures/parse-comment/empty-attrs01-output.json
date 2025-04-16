@@ -50,32 +50,61 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "value",
             "imported": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 1
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 2
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 1
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 2
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 2
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'x'",
-          "pos": {
-            "number": 1,
-            "typeOffset": 9
+          "type": "Literal",
+          "value": "x",
+          "raw": "'x'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 9
+            },
+            "end": {
+              "line": 1,
+              "column": 12
+            }
           }
         },
         "attributes": [],
@@ -83,100 +112,126 @@
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 2
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 1,
-              "typeOffset": 2
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 3
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 2
+              },
+              "end": {
+                "line": 1,
+                "column": 3
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 1,
-              "typeOffset": 4
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 8
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 4
+              },
+              "end": {
+                "line": 1,
+                "column": 8
+              }
             }
           },
           {
             "type": "String",
             "value": "'x'",
-            "pos": {
-              "number": 1,
-              "typeOffset": 9
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 12
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "with",
-            "pos": {
-              "number": 1,
-              "typeOffset": 13
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 17
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 13
+              },
+              "end": {
+                "line": 1,
+                "column": 17
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 1,
-              "typeOffset": 18
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 18
+              },
+              "end": {
+                "line": 1,
+                "column": 19
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 1,
-              "typeOffset": 19
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 19
+              },
+              "end": {
+                "line": 1,
+                "column": 20
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 20
+          }
+        }
       }
     }
   ],

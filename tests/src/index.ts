@@ -19,7 +19,7 @@ describe("Test for format", () => {
   for (const { input, inputFileName, outputFileName, config } of listupFixtures(
     path.resolve(dirname, "../fixtures/format"),
   )) {
-    // if (!inputFileName.includes("test")) continue;
+    // if (!inputFileName.includes("$test$")) continue;
 
     const textOption = config.testOption as undefined | TestOption;
     for (const forceUsedTypescript of [false, null]) {

@@ -68,63 +68,130 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportDefaultSpecifier",
+            "type": "ImportDefaultSpecifier",
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 0
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
               }
             }
           },
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "value",
             "imported": {
               "type": "Identifier",
-              "value": "Y",
-              "pos": {
-                "number": 1,
-                "typeOffset": 4
+              "name": "Y",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 4
+                },
+                "end": {
+                  "line": 1,
+                  "column": 5
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "Y",
-              "pos": {
-                "number": 1,
-                "typeOffset": 4
+              "name": "Y",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 4
+                },
+                "end": {
+                  "line": 1,
+                  "column": 5
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 4
+              },
+              "end": {
+                "line": 1,
+                "column": 5
               }
             }
           },
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "value",
             "imported": {
               "type": "Identifier",
-              "value": "Z",
-              "pos": {
-                "number": 1,
-                "typeOffset": 6
+              "name": "Z",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 6
+                },
+                "end": {
+                  "line": 1,
+                  "column": 7
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "Z",
-              "pos": {
-                "number": 1,
-                "typeOffset": 6
+              "name": "Z",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 6
+                },
+                "end": {
+                  "line": 1,
+                  "column": 7
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 7
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'foo'",
-          "pos": {
-            "number": 2,
-            "typeOffset": 5
+          "type": "Literal",
+          "value": "foo",
+          "raw": "'foo'",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 5
+            },
+            "end": {
+              "line": 2,
+              "column": 10
+            }
           }
         },
         "attributes": [],
@@ -132,92 +199,140 @@
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": ",",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 2
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 2
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 1,
-              "typeOffset": 3
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 3
+              },
+              "end": {
+                "line": 1,
+                "column": 4
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "Y",
-            "pos": {
-              "number": 1,
-              "typeOffset": 4
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 4
+              },
+              "end": {
+                "line": 1,
+                "column": 5
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": ",",
-            "pos": {
-              "number": 1,
-              "typeOffset": 5
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 5
+              },
+              "end": {
+                "line": 1,
+                "column": 6
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "Z",
-            "pos": {
-              "number": 1,
-              "typeOffset": 6
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 7
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 1,
-              "typeOffset": 7
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 8
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 8
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 1,
-              "typeOffset": 9
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 13
+              }
             }
           },
           {
             "type": "String",
             "value": "'foo'",
-            "pos": {
-              "number": 2,
-              "typeOffset": 5
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 5
+              },
+              "end": {
+                "line": 2,
+                "column": 10
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 10
+          }
+        }
       }
     }
   ],

@@ -86,42 +86,88 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportNamespaceSpecifier",
+            "type": "ImportNamespaceSpecifier",
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 6
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 6
+                },
+                "end": {
+                  "line": 1,
+                  "column": 7
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 7
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "\"../../../package.json\"",
-          "pos": {
-            "number": 3,
-            "typeOffset": 0
+          "type": "Literal",
+          "value": "../../../package.json",
+          "raw": "\"../../../package.json\"",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 23
+            }
           }
         },
         "attributes": [
           {
-            "type": "JsdocImportTagTypeImportAttribute",
+            "type": "ImportAttribute",
             "key": {
               "type": "Identifier",
-              "value": "type",
-              "pos": {
-                "number": 3,
-                "typeOffset": 35
+              "name": "type",
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 35
+                },
+                "end": {
+                  "line": 3,
+                  "column": 39
+                }
               }
             },
             "value": {
-              "type": "String",
-              "value": "'json'",
-              "pos": {
-                "number": 3,
-                "typeOffset": 41
+              "type": "Literal",
+              "value": "json",
+              "raw": "'json'",
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 41
+                },
+                "end": {
+                  "line": 3,
+                  "column": 47
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 35
+              },
+              "end": {
+                "line": 3,
+                "column": 47
               }
             }
           }
@@ -130,148 +176,168 @@
           {
             "type": "Punctuator",
             "value": "*",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "  ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "as",
-            "pos": {
-              "number": 1,
-              "typeOffset": 3
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 5
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 3
+              },
+              "end": {
+                "line": 1,
+                "column": 5
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 6
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 7
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 2,
-              "typeOffset": 3
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 3
+              },
+              "end": {
+                "line": 2,
+                "column": 7
+              }
             }
           },
           {
             "type": "String",
             "value": "\"../../../package.json\"",
-            "pos": {
-              "number": 3,
-              "typeOffset": 0
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "     ",
-            "pos": {
-              "number": 3,
-              "typeOffset": 23
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 3,
+                "column": 23
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "with",
-            "pos": {
-              "number": 3,
-              "typeOffset": 28
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 3,
-              "typeOffset": 32
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 28
+              },
+              "end": {
+                "line": 3,
+                "column": 32
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 3,
-              "typeOffset": 33
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 3,
-              "typeOffset": 34
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 33
+              },
+              "end": {
+                "line": 3,
+                "column": 34
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "type",
-            "pos": {
-              "number": 3,
-              "typeOffset": 35
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 35
+              },
+              "end": {
+                "line": 3,
+                "column": 39
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": ":",
-            "pos": {
-              "number": 3,
-              "typeOffset": 39
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 3,
-              "typeOffset": 40
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 39
+              },
+              "end": {
+                "line": 3,
+                "column": 40
+              }
             }
           },
           {
             "type": "String",
             "value": "'json'",
-            "pos": {
-              "number": 3,
-              "typeOffset": 41
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 3,
-              "typeOffset": 47
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 41
+              },
+              "end": {
+                "line": 3,
+                "column": 47
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 3,
-              "typeOffset": 48
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 48
+              },
+              "end": {
+                "line": 3,
+                "column": 49
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 49
+          }
+        }
       }
     }
   ],

@@ -86,23 +86,46 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportNamespaceSpecifier",
+            "type": "ImportNamespaceSpecifier",
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 6
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 6
+                },
+                "end": {
+                  "line": 1,
+                  "column": 7
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 7
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'foo'",
-          "pos": {
-            "number": 3,
-            "typeOffset": 0
+          "type": "Literal",
+          "value": "foo",
+          "raw": "'foo'",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 5
+            }
           }
         },
         "attributes": [],
@@ -110,60 +133,84 @@
           {
             "type": "Punctuator",
             "value": "*",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "  ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "as",
-            "pos": {
-              "number": 1,
-              "typeOffset": 3
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 5
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 3
+              },
+              "end": {
+                "line": 1,
+                "column": 5
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 6
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 7
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 2,
-              "typeOffset": 3
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 3
+              },
+              "end": {
+                "line": 2,
+                "column": 7
+              }
             }
           },
           {
             "type": "String",
             "value": "'foo'",
-            "pos": {
-              "number": 3,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 3,
+                "column": 5
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 5
+          }
+        }
       }
     }
   ],

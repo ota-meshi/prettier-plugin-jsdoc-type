@@ -14,7 +14,7 @@ describe("Test for format", () => {
       outputExt: ".json",
     },
   )) {
-    // if (!inputFileName.includes("test")) continue;
+    // if (!inputFileName.includes("$test$")) continue;
 
     describe(inputFileName, () => {
       it("should be the formatted result expect.", () => {

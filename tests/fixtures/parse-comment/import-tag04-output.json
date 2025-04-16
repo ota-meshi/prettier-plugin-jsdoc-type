@@ -50,23 +50,46 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportDefaultSpecifier",
+            "type": "ImportDefaultSpecifier",
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 0
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 1
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'foo'",
-          "pos": {
-            "number": 1,
-            "typeOffset": 16
+          "type": "Literal",
+          "value": "foo",
+          "raw": "'foo'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 16
+            },
+            "end": {
+              "line": 1,
+              "column": 21
+            }
           }
         },
         "attributes": [],
@@ -74,44 +97,56 @@
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "      ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 1,
-              "typeOffset": 7
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": "     ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 11
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 11
+              }
             }
           },
           {
             "type": "String",
             "value": "'foo'",
-            "pos": {
-              "number": 1,
-              "typeOffset": 16
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "line": 1,
+                "column": 21
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 21
+          }
+        }
       }
     }
   ],

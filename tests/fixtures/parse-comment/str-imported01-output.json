@@ -32,32 +32,62 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "value",
             "imported": {
-              "type": "String",
-              "value": "'X'",
-              "pos": {
-                "number": 1,
-                "typeOffset": 1
+              "type": "Literal",
+              "value": "X",
+              "raw": "'X'",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 4
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 1,
-                "typeOffset": 8
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 8
+                },
+                "end": {
+                  "line": 1,
+                  "column": 9
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 9
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'x'",
-          "pos": {
-            "number": 1,
-            "typeOffset": 16
+          "type": "Literal",
+          "value": "x",
+          "raw": "'x'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 16
+            },
+            "end": {
+              "line": 1,
+              "column": 19
+            }
           }
         },
         "attributes": [],
@@ -65,92 +95,112 @@
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "String",
             "value": "'X'",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 4
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 4
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "as",
-            "pos": {
-              "number": 1,
-              "typeOffset": 5
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 7
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 5
+              },
+              "end": {
+                "line": 1,
+                "column": 7
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 1,
-              "typeOffset": 8
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 9
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 1,
-              "typeOffset": 9
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 10
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 10
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 1,
-              "typeOffset": 11
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 15
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 11
+              },
+              "end": {
+                "line": 1,
+                "column": 15
+              }
             }
           },
           {
             "type": "String",
             "value": "'x'",
-            "pos": {
-              "number": 1,
-              "typeOffset": 16
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "line": 1,
+                "column": 19
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 19
+          }
+        }
       }
     },
     {
@@ -202,32 +252,62 @@
         "type": "JsdocImportTagType",
         "specifiers": [
           {
-            "type": "JsdocImportTagTypeImportSpecifier",
+            "type": "ImportSpecifier",
             "importKind": "type",
             "imported": {
-              "type": "String",
-              "value": "'X'",
-              "pos": {
-                "number": 2,
-                "typeOffset": 6
+              "type": "Literal",
+              "value": "X",
+              "raw": "'X'",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 6
+                },
+                "end": {
+                  "line": 1,
+                  "column": 9
+                }
               }
             },
             "local": {
               "type": "Identifier",
-              "value": "X",
-              "pos": {
-                "number": 2,
-                "typeOffset": 13
+              "name": "X",
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 13
+                },
+                "end": {
+                  "line": 1,
+                  "column": 14
+                }
+              }
+            },
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 14
               }
             }
           }
         ],
         "source": {
-          "type": "String",
-          "value": "'x'",
-          "pos": {
-            "number": 2,
-            "typeOffset": 21
+          "type": "Literal",
+          "value": "x",
+          "raw": "'x'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 21
+            },
+            "end": {
+              "line": 1,
+              "column": 24
+            }
           }
         },
         "attributes": [],
@@ -235,108 +315,126 @@
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 2,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "type",
-            "pos": {
-              "number": 2,
-              "typeOffset": 1
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 2,
-              "typeOffset": 5
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 5
+              }
             }
           },
           {
             "type": "String",
             "value": "'X'",
-            "pos": {
-              "number": 2,
-              "typeOffset": 6
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 2,
-              "typeOffset": 9
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 6
+              },
+              "end": {
+                "line": 1,
+                "column": 9
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "as",
-            "pos": {
-              "number": 2,
-              "typeOffset": 10
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 2,
-              "typeOffset": 12
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 10
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "X",
-            "pos": {
-              "number": 2,
-              "typeOffset": 13
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 13
+              },
+              "end": {
+                "line": 1,
+                "column": 14
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 2,
-              "typeOffset": 14
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 2,
-              "typeOffset": 15
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 14
+              },
+              "end": {
+                "line": 1,
+                "column": 15
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 2,
-              "typeOffset": 16
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 2,
-              "typeOffset": 20
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "line": 1,
+                "column": 20
+              }
             }
           },
           {
             "type": "String",
             "value": "'x'",
-            "pos": {
-              "number": 2,
-              "typeOffset": 21
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 21
+              },
+              "end": {
+                "line": 1,
+                "column": 24
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 24
+          }
+        }
       }
     }
   ],

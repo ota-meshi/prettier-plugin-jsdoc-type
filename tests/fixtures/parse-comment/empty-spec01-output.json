@@ -50,11 +50,18 @@
         "type": "JsdocImportTagType",
         "specifiers": [],
         "source": {
-          "type": "String",
-          "value": "'x'",
-          "pos": {
-            "number": 1,
-            "typeOffset": 8
+          "type": "Literal",
+          "value": "x",
+          "raw": "'x'",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 8
+            },
+            "end": {
+              "line": 1,
+              "column": 11
+            }
           }
         },
         "attributes": [],
@@ -62,52 +69,70 @@
           {
             "type": "Punctuator",
             "value": "{",
-            "pos": {
-              "number": 1,
-              "typeOffset": 0
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 1
+              }
             }
           },
           {
             "type": "Punctuator",
             "value": "}",
-            "pos": {
-              "number": 1,
-              "typeOffset": 1
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 2
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "line": 1,
+                "column": 2
+              }
             }
           },
           {
             "type": "Identifier",
             "value": "from",
-            "pos": {
-              "number": 1,
-              "typeOffset": 3
-            }
-          },
-          {
-            "type": "Whitespace",
-            "value": " ",
-            "pos": {
-              "number": 1,
-              "typeOffset": 7
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 3
+              },
+              "end": {
+                "line": 1,
+                "column": 7
+              }
             }
           },
           {
             "type": "String",
             "value": "'x'",
-            "pos": {
-              "number": 1,
-              "typeOffset": 8
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 11
+              }
             }
           }
-        ]
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 11
+          }
+        }
       }
     }
   ],
