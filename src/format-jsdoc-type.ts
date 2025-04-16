@@ -24,6 +24,9 @@ export async function formatJSDocType(
       if (!lastOptional) return null;
       return `${formatted.slice(0, lastOptional.index)}=${lastOptional[1]}`;
     }
+    if (/^function\b/u.test(trimmedType)) {
+      return await formatJSDocTypeAsMethodSignature(trimmedType, options);
+    }
     return await formatJSDocTypeAsReturnType(trimmedType, options);
   } catch {
     return null;
@@ -90,6 +93,18 @@ async function formatJSDocTypeAsArrayElementType(
     ?.trim()
     .replace(/^\[[^\S\n]*/u, "")
     .replace(/[^\S\n]*\]$/u, "");
+}
+
+async function formatJSDocTypeAsMethodSignature(
+  type: string,
+  options: ParserOptions,
+): Promise<string> {
+  const formatted = await formatJSDocTypeAsTypeAlias(`{${type}}`, options);
+
+  return formatted
+    ?.trim()
+    .replace(/^\{[^\S\n]*/u, "")
+    .replace(/[^\S\n]*\}$/u, "");
 }
 
 async function formatJSDocImportType0(
