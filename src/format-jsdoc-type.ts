@@ -10,6 +10,20 @@ export async function formatJSDocType(
     if (trimmedType.startsWith("...")) {
       return await formatJSDocTypeAsArrayElementType(trimmedType, options);
     }
+    if (trimmedType.length > 1 && trimmedType.endsWith("?")) {
+      return await formatJSDocTypeAsTypeAlias(trimmedType, options);
+    }
+    if (trimmedType.endsWith("=")) {
+      const formatted = await formatJSDocTypeAsTypeAlias(
+        `(${trimmedType.slice(0, -1)})?`,
+        options,
+      );
+      if (formatted == null) return null;
+      // Replace the last `?` with `=`
+      const lastOptional = /\?(\s*)$/u.exec(formatted);
+      if (!lastOptional) return null;
+      return `${formatted.slice(0, lastOptional.index)}=${lastOptional[1]}`;
+    }
     return await formatJSDocTypeAsReturnType(trimmedType, options);
   } catch {
     return null;
@@ -47,11 +61,11 @@ async function formatJSDocTypeAsReturnType(
     .replace(/[^\S\n]*\{\s*\}$/u, "");
 }
 
-async function formatJSDocTypeAsArrayElementType(
+async function formatJSDocTypeAsTypeAlias(
   type: string,
   options: ParserOptions,
 ): Promise<string> {
-  const formatted = await prettier.format(`type A = [${type}]`, {
+  const formatted = await prettier.format(`type A = ${type}`, {
     ...options,
     parser: "typescript",
     printWidth: (options.printWidth ?? 80) + 10,
@@ -62,7 +76,19 @@ async function formatJSDocTypeAsArrayElementType(
     .replace(/^;/u, "")
     .replace(/;$/u, "")
     .trim()
-    .replace(/^type\s+A\s*=\s*\[[^\S\n]*/u, "")
+    .replace(/^type\s+A\s*=[^\S\n]*/u, "")
+    .replace(/[^\S\n]*$/u, "");
+}
+
+async function formatJSDocTypeAsArrayElementType(
+  type: string,
+  options: ParserOptions,
+): Promise<string> {
+  const formatted = await formatJSDocTypeAsTypeAlias(`[${type}]`, options);
+
+  return formatted
+    ?.trim()
+    .replace(/^\[[^\S\n]*/u, "")
     .replace(/[^\S\n]*\]$/u, "");
 }
 
