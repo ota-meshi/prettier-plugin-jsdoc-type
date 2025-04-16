@@ -2,4 +2,4 @@
 "prettier-plugin-jsdoc-type": patch
 ---
 
-fix: fix for jsdoc function type
+fix: issue for jsdoc function type

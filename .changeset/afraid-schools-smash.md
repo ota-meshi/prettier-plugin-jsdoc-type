@@ -2,4 +2,4 @@
 "prettier-plugin-jsdoc-type": patch
 ---
 
-fix: fix for trailing `=` and `?`
+fix: issue for trailing `=` and `?`
