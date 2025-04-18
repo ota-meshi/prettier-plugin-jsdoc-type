@@ -5,96 +5,14 @@ import type {
   JsdocImportTagTypeImportDefaultSpecifier,
   JsdocImportTagTypeImportNamespaceSpecifier,
   JsdocImportTagTypeImportSpecifier,
-  Position,
+  Keyword,
+  Punctuator,
   PunctuatorToken,
   Token,
 } from "./ast.js";
 import { identifier, identifierOrLiteral, literal } from "./ast.js";
-
-type Keyword = "type" | "as" | "from" | "with";
-type Punctuator = "*" | ";" | "," | "{" | "}" | ":";
-type TokenBuilder = (text: string, pos: Position) => Token | null;
-const RE_WHITESPACE = /\s+/uy;
-const TOKEN_BUILDERS: TokenBuilder[] = [
-  regexpToTokenBuilder(
-    /[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*/uy,
-    "Identifier",
-  ),
-  regexpToTokenBuilder(
-    /(?<quote>["'])(?:[^\n\r"'\\]+|(?!\k<quote>)["']|\\(?:\r\n|[\s\S]))\k<quote>/uy,
-    "String",
-  ),
-  (text, pos) => {
-    const c = text[pos.column];
-    return "*;,{}:".includes(c)
-      ? {
-          type: "Punctuator",
-          value: c,
-          loc: {
-            start: pos,
-            end: { line: pos.line, column: pos.column + 1 },
-          },
-        }
-      : null;
-  },
-];
-
-function regexpToTokenBuilder(re: RegExp, type: Token["type"]): TokenBuilder {
-  return (text, pos) => {
-    re.lastIndex = pos.column;
-    const value = re.exec(text)?.[0];
-    if (!value) return null;
-    return {
-      type,
-      value,
-      loc: {
-        start: pos,
-        end: { line: pos.line, column: pos.column + value.length },
-      },
-    };
-  };
-}
-
-export interface Lines {
-  getLine(lineNumber: number): string | null;
-}
-
-class Tokenizer {
-  private pos: Position = { line: 1, column: 0 };
-
-  public readonly tokens: Token[] = [];
-
-  private readonly lines: Lines;
-
-  public constructor(lines: Lines) {
-    this.lines = lines;
-  }
-
-  public next(): Token | null {
-    const line = this.pos.line;
-    const text = this.lines.getLine(line);
-    if (text == null) return null;
-    // Skip whitespace
-    RE_WHITESPACE.lastIndex = this.pos.column;
-    const whitespace = RE_WHITESPACE.exec(text)?.[0];
-    if (whitespace) {
-      this.pos = { line, column: this.pos.column + whitespace.length };
-    }
-
-    if (text.length <= this.pos.column) {
-      this.pos = { line: line + 1, column: 0 };
-      return this.next();
-    }
-    for (const builder of TOKEN_BUILDERS) {
-      const token = builder(text, this.pos);
-      if (!token) continue;
-      this.pos = { ...token.loc.end };
-      this.tokens.push(token);
-      return token;
-    }
-    return null;
-  }
-}
+import type { Lines } from "./lines.js";
+import { Tokenizer } from "./tokenizer.js";
 
 class ParserState {
   public readonly tokenizer: Tokenizer;
