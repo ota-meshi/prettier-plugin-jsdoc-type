@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.1.12
+
+### Patch Changes
+
+- [#25](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/25) [`e4c0881`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/e4c0881154aa8209b81714a41d97d0097f399535) Thanks [@ota-meshi](https://github.com/ota-meshi)! - fix: issue for complex jsdoc function type
+
 ## 0.1.11
 
 ### Patch Changes
