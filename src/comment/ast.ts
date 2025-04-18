@@ -1,3 +1,31 @@
+export type Keyword = "type" | "as" | "from" | "with";
+export type Punctuator =
+  | "("
+  | ")"
+  | "{"
+  | "}"
+  | "["
+  | "]"
+  | "|"
+  | "&"
+  | "<"
+  | ">"
+  | ","
+  | ";"
+  | "*"
+  | "?"
+  | "!"
+  | "="
+  | ":"
+  | "."
+  | "#"
+  | "~"
+  | "/"
+  | "@"
+  | "+"
+  | "-"
+  | "..."
+  | "=>";
 export type Position = {
   line: number;
   /** The offset position within the `type` text. */
@@ -42,7 +70,7 @@ export type JsdocImportTagTypeImportAttribute = HasLocation & {
 };
 export type JsdocStringLiteral = HasLocation & {
   type: "Literal";
-  value: string;
+  value?: string | null;
   raw: string;
 };
 export type JsdocIdentifier = HasLocation & {
@@ -52,8 +80,15 @@ export type JsdocIdentifier = HasLocation & {
 
 export type IdentifierToken = BaseToken<"Identifier">;
 export type StringToken = BaseToken<"String">;
+export type NumericToken = BaseToken<"Numeric">;
 export type PunctuatorToken = BaseToken<"Punctuator">;
-export type Token = IdentifierToken | StringToken | PunctuatorToken;
+export type TemplateToken = BaseToken<"Template">;
+export type Token =
+  | IdentifierToken
+  | StringToken
+  | NumericToken
+  | PunctuatorToken
+  | TemplateToken;
 type BaseToken<T extends string> = HasLocation & {
   type: T;
   value: string;
