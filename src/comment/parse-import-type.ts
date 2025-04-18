@@ -10,8 +10,8 @@ import type {
   PunctuatorToken,
   Token,
 } from "./ast.js";
-import { identifier, identifierOrLiteral, literal } from "./ast.js";
 import type { Lines } from "./lines.js";
+import { identifier, identifierOrLiteral, literal } from "./node.js";
 import { Tokenizer } from "./tokenizer.js";
 
 class ParserState {

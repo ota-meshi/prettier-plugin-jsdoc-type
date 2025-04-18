@@ -70,7 +70,7 @@ export type JsdocImportTagTypeImportAttribute = HasLocation & {
 };
 export type JsdocStringLiteral = HasLocation & {
   type: "Literal";
-  value?: string | null;
+  value: string;
   raw: string;
 };
 export type JsdocIdentifier = HasLocation & {
@@ -93,24 +93,3 @@ type BaseToken<T extends string> = HasLocation & {
   type: T;
   value: string;
 };
-
-export function identifierOrLiteral(
-  token: IdentifierToken | StringToken,
-): JsdocIdentifier | JsdocStringLiteral {
-  return token.type === "Identifier" ? identifier(token) : literal(token);
-}
-export function identifier(token: IdentifierToken): JsdocIdentifier {
-  return {
-    type: "Identifier",
-    name: token.value,
-    loc: token.loc,
-  };
-}
-export function literal(token: StringToken): JsdocStringLiteral {
-  return {
-    type: "Literal",
-    value: token.value.slice(1, -1),
-    raw: token.value,
-    loc: token.loc,
-  };
-}
