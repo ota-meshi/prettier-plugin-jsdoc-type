@@ -10,6 +10,10 @@
       "automerge": true
     },
     {
+      "matchManagers": ["dockerfile", "github-actions"],
+      "automerge": true
+    },
+    {
       "depTypeList": ["devDependencies"],
       "automerge": true
     }
