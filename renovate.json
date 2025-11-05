@@ -10,7 +10,7 @@
       "automerge": true
     },
     {
-      "matchManagers": ["dockerfile", "github-actions"],
+      "matchManagers": ["devcontainer", "github-actions"],
       "automerge": true
     },
     {
