@@ -1,5 +1,5 @@
 import type { JsdocImportTagType, Position, Token } from "./ast.js";
-import { parseImportType } from "./parse-import-type.js";
+import { parseImportTagType } from "./parse-import-type.js";
 import type * as commentParser from "comment-parser";
 
 export type JsdocImportTagSpec = commentParser.Spec & {
@@ -37,7 +37,7 @@ export function tokenizeImportType(
   spec: commentParser.Spec,
 ): commentParser.Spec {
   const lines = new SpecLines(spec);
-  const node = parseImportType(lines);
+  const node = parseImportTagType(lines);
   if (!node) return spec;
 
   const lastToken: Token = node.tokens[node.tokens.length - 1];

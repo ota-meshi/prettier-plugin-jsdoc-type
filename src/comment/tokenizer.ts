@@ -193,7 +193,11 @@ export class Tokenizer {
   }
 
   public next(): Token | null {
-    if (this.buffer.length) return this.buffer.shift()!;
+    if (this.buffer.length) {
+      const token = this.buffer.shift()!;
+      this.tokens.push(token);
+      return token;
+    }
     for (;;) {
       const line = this.pos.line;
       const text = this.lines.getLine(line);
@@ -227,8 +231,17 @@ export class Tokenizer {
     if (this.buffer.length) return this.buffer[0];
     const token = this.next();
     if (token) {
-      this.buffer.push(token);
+      this.back(token);
     }
     return token;
+  }
+
+  public back(token: Token): void {
+    const index = this.tokens.lastIndexOf(token);
+    if (index === -1) {
+      throw new Error("Cannot back token");
+    }
+    const tokens = this.tokens.splice(index);
+    this.buffer.unshift(...tokens);
   }
 }

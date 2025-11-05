@@ -11,7 +11,10 @@ export function* listupFixtures(
   outputFileName: string;
   config: Partial<ParserOptions>;
 }> {
-  for (const dirent of fs.readdirSync(dir, { withFileTypes: true })) {
+  for (const dirent of fs.readdirSync(dir, {
+    withFileTypes: true,
+    recursive: true,
+  })) {
     if (!dirent.isFile()) continue;
     const inputFileName = path.join(dirent.parentPath, dirent.name);
     const ext = path.extname(dirent.name);

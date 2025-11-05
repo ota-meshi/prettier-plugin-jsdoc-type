@@ -1,7 +1,10 @@
 import type {
   IdentifierToken,
+  JsdocBigIntLiteral,
   JsdocIdentifier,
+  JsdocNumberLiteral,
   JsdocStringLiteral,
+  NumericToken,
   StringToken,
 } from "./ast.js";
 
@@ -17,10 +20,35 @@ export function identifier(token: IdentifierToken): JsdocIdentifier {
     loc: token.loc,
   };
 }
-export function literal(token: StringToken): JsdocStringLiteral {
+export function literal(token: StringToken): JsdocStringLiteral;
+export function literal(
+  token: NumericToken,
+): JsdocNumberLiteral | JsdocBigIntLiteral;
+export function literal(
+  token: StringToken | NumericToken,
+): JsdocStringLiteral | JsdocNumberLiteral | JsdocBigIntLiteral;
+export function literal(
+  token: StringToken | NumericToken,
+): JsdocStringLiteral | JsdocNumberLiteral | JsdocBigIntLiteral {
+  if (token.type === "String") {
+    return {
+      type: "Literal",
+      value: parseText(token.value.slice(1, -1)),
+      raw: token.value,
+      loc: token.loc,
+    };
+  }
+  if (token.value.endsWith("n")) {
+    return {
+      type: "Literal",
+      value: BigInt(token.value.slice(0, -1)),
+      raw: token.value,
+      loc: token.loc,
+    };
+  }
   return {
     type: "Literal",
-    value: parseText(token.value.slice(1, -1)),
+    value: Number(token.value),
     raw: token.value,
     loc: token.loc,
   };

@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-describe("Test for format", () => {
+describe("Test for parse comment", () => {
   for (const { input, inputFileName, outputFileName } of listupFixtures(
     path.resolve(dirname, "../../fixtures/parse-comment"),
     {

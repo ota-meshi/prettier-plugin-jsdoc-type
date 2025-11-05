@@ -1,4 +1,5 @@
 import { tokenizeImportType } from "./tokenize-import-type.js";
+import { tokenizeTypeExpression } from "./tokenize-type-expression.js";
 import * as commentParser from "comment-parser";
 
 type Tokenizer = (spec: commentParser.Spec) => commentParser.Spec;
@@ -11,8 +12,6 @@ export function parseComment(text: string): commentParser.Block {
 }
 
 function getTokenizers(): Tokenizer[] {
-  const typeTokenizer = commentParser.tokenizers.type("preserve");
-
   return [
     commentParser.tokenizers.tag(),
     /** Type tokenizer. */
@@ -21,7 +20,7 @@ function getTokenizers(): Tokenizer[] {
         return tokenizeImportType(spec);
       }
 
-      return typeTokenizer(spec);
+      return tokenizeTypeExpression(spec);
     },
     commentParser.tokenizers.name(),
     commentParser.tokenizers.description("preserve"),
