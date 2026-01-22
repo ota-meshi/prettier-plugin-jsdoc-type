@@ -33,8 +33,8 @@
     "ts": "node --import=tsx",
     "mocha": "pnpm run ts ./node_modules/mocha/bin/mocha.js",
     "preversion": "pnpm test && git add .",
-    "version": "env-cmd -e version pnpm run update && git add .",
-    "version:ci": "env-cmd -e version-ci pnpm run update && changeset version",
+    "version": "env-cmd -e version -- pnpm run update && git add .",
+    "version:ci": "env-cmd -e version-ci -- pnpm run update && changeset version",
     "prerelease": "pnpm run build",
     "release": "changeset publish"
   },
