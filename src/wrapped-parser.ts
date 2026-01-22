@@ -80,7 +80,8 @@ export function createWrappedParser<T = unknown>(
       if (plugin?.preprocess || rawParser.preprocess) {
         processedText =
           plugin?.preprocess?.(context, processedText, wrappedOptions) ??
-          rawParser.preprocess!(processedText, wrappedOptions);
+          (await rawParser.preprocess!(processedText, wrappedOptions));
+        // eslint-disable-next-line require-atomic-updates -- OK
         options.originalText = processedText;
       }
       return (
