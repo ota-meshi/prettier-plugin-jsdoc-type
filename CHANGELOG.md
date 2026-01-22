@@ -1,5 +1,11 @@
 # prettier-plugin-jsdoc-type
 
+## 0.2.0
+
+### Minor Changes
+
+- [#61](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/pull/61) [`23f633a`](https://github.com/ota-meshi/prettier-plugin-jsdoc-type/commit/23f633a2f91af7373cc788baeac2045aab364791) Thanks [@renovate](https://github.com/apps/renovate)! - feat: support async parser preprocess
+
 ## 0.1.12
 
 ### Patch Changes
