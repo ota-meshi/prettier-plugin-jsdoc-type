@@ -1,6 +1,5 @@
 import pkg from "../package.json" with { type: "json" };
 import { getNewVersion } from "./lib/changesets-util.js";
-import { ESLint } from "eslint";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -14,11 +13,8 @@ void main();
 
 /** main */
 async function main() {
-  if (!fs.existsSync(META_PATH)) {
-    fs.writeFileSync(META_PATH, "", "utf8");
-  }
-  const eslint = new ESLint({ fix: true });
-  const [result] = await eslint.lintText(
+  fs.writeFileSync(
+    META_PATH,
     `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -27,9 +23,8 @@ async function main() {
 export const name = ${JSON.stringify(name)} as const;
 export const version = ${JSON.stringify(await getVersion())} as const;
 `,
-    { filePath: META_PATH },
+    "utf8",
   );
-  fs.writeFileSync(META_PATH, result.output!);
 }
 
 /** Get version */
