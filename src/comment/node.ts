@@ -28,7 +28,7 @@ export function literal(token: StringToken): JsdocStringLiteral {
 
 function parseText(value: string): string {
   let str = "";
-  for (let index = 0; index < value.length; ) {
+  for (let index = 0; index < value.length;) {
     const c = value[index];
     if (c === "\\") {
       const parsed = parseEscapedChar(value, index);

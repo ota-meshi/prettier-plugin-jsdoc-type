@@ -1,5 +1,5 @@
-/** @type {import("foo").A} */
-;(): import("foo").A => {
+;/** @type {import("foo").A} */
+(): import("foo").A => {
   //
 }
 /**
