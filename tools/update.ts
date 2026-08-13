@@ -1,1 +1,1 @@
-import "./update-meta";
+import "./update-meta.js";
