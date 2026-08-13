@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "pnpm run build:meta && pnpm run build:tsup",
-    "build:meta": "pnpm run ts -- ./tools/update-meta.ts",
+    "build:meta": "pnpm run ts -- ./tools/update-meta.ts && eslint src/meta.ts --fix",
     "build:tsup": "tsup",
     "lint": "eslint .",
     "tsc": "tsc --project tsconfig.json",
