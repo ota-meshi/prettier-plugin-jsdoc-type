@@ -44,10 +44,9 @@ jobs:
         uses: changesets/action@v2.0.0
         with:
           # this expects you to have a npm script called version that runs some logic and then calls `changeset version`.
-          version: pnpm run version:ci
+          version-script: pnpm run version:ci
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm run release
-          commit: "chore: release prettier-plugin-jsdoc-type"
-          title: "chore: release prettier-plugin-jsdoc-type"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish-script: pnpm run release
+          commit-message: "chore: release prettier-plugin-jsdoc-type"
+          pr-title: "chore: release prettier-plugin-jsdoc-type"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
